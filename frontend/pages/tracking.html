@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking - MedInsight</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>MedInsight Tracking</h1>
+  </header>
+  <main>
+    <form id="trackingForm">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="data">Tracking Data:</label>
+      <textarea id="data" name="data" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <section>
+      <h2>Tracked Entries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Username</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody id="trackingTableBody">
+          <tr>
+            <td>2025-01-01</td>
+            <td>12:00</td>
+            <td>JohnDoe</td>
+            <td>Initial entry</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../js/tracking.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+/* General Styles for the Dashboard */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+header {
+  background-color: #384B70;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  padding: 2rem;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  color: #384B70;
+  border-bottom: 2px solid #507687;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Chart Styles */
+canvas {
+  display: block;
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collap

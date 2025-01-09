@@ -1,0 +1,9 @@
+numpy
+pandas
+flask
+fastapi
+tensorflow
+pytorch
+spacy
+transformers
+scikit-learn

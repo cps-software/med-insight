@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - MedInsight</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>MedInsight Dashboard</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Charts</h2>
+      <canvas id="pieChart" width="400" height="200"></canvas>
+      <canvas id="barChart" width="400" height="200"></canvas>
+    </section>
+    <section>
+      <h2>Data Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Sample Data</td>
+            <td>Active</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Example Entry</td>
+            <td>Inactive</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../js/dashboard.js"></script>
+</body>
+
+</html>

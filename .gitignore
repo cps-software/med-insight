@@ -1,2 +1,11 @@
-.zig-cache/
-zig-out/
+# macOS files
+.DS_Store
+
+# Node modules (if using Node.js in frontend or backend)
+node_modules/
+
+# Python
+pycache/ *.pyc
+
+#Logs
+*.Log
