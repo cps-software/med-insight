@@ -1,0 +1,51 @@
+-------------------------------------------------------------------------------
+Technical Approach for Building DSS VistA Extract via CDW
+-------------------------------------------------------------------------------
+
+Programming Language: Python
+
+Python is well-suited for this application due to its versatility, extensive library ecosystem, and ease of integration with databases, file formats, and reporting tools.
+
+Technology Stack:
+
+1. Database Interaction
+    - Library: pyodbc or SQLAlchemy
+    - Purpose: connect to Microsoft SQL Server for querying and transforming data
+
+2. Data Transformation
+    - Library: pandas
+    - Purpose: Provides tools for data manipulation and transformation
+
+3. File Export
+    - Format Support: Python standard and third-party libraries can generate CSV, XML, or JSON
+
+4. File Transmission
+    - Protocols: ftplib for FTP, paramiko for SFTP, or requests for HTTP-based transfer
+
+5. Reporting
+    - Library: Matplotlib, Seaborn, or Plotly for visualizations
+    - ReportLab or WeasyPrint for PDF reports
+
+6. Local Database for Intermediate Storage
+    - Product: SQLite (bundled with Python)
+    - Purpose: Lightweight, relational database for intermediate data storage
+
+7. Deployment and Automation:
+    - Tools: cron for scheduling on Linux or Task Scheduler on Windows
+    - Environment: Docker or virtual environments (venv)
+
+-------------------------------------------------------------------------------
+Step-by Step Plan
+-------------------------------------------------------------------------------
+
+1. Requirements Analysis
+    - Define input and output formats:
+        - Input: Microsoft SQL Server database schema
+        - Output: Text-based file formats (CSV, XML, JSON) and reports (PDF, charts)
+    - Define transformation rules (e.g., renaming columns, aggregating data, filtering rows)
+    - Define transmission requirements:
+        - Protocol: FTP, SFTP, or HTTP API
+        - Security: Encryption, authentication
+    - Define reporting needs
+        - Types: Summary, detailed, or graphical reports
+        - Output format: PDF, HTML, or images

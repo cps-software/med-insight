@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Requirements Analysis
+-------------------------------------------------------------------------------
+
+Input Formats
+
+The source system for the DSS VistA extracts is the VA Corporate Data Warehouse (CDW).
+
+To my knowledge, the proper CDW database server is:
+  vhacdwdwhsql33.vha.med.va.gov/
+
+To my knowledge, the applicable database within this server is:
+  CDWWork
+
+The CDWWork data is available via:
+  Views
+
+
