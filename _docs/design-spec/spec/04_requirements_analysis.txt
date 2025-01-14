@@ -20,11 +20,12 @@ Input Formats:
     - The mail group for this extract is DSS-ADMS
         - Purpose: receive messages when extract is complete and when data is transmitted to AITC
     - VistA file --> CDW view crosswalk
-        - PATIENT MOVEMENT (#405) --> CDWWork.Inpat.PatientTransfer
-                                  --> CDWWork.Impat.ProvisionalMovement
-                                  --> CDWWork.Inpat.SpecialtyTransfer
-                                  --> CDWWork.Inpat.SpecialtyTransferDiagnosis
-                                  --> CDWWork.Inpat.Lodger
+        - PATIENT MOVEMENT (#405)
+            --> CDWWork.Inpat.PatientTransfer
+            --> CDWWork.Impat.ProvisionalMovement
+            --> CDWWork.Inpat.SpecialtyTransfer
+            --> CDWWork.Inpat.SpecialtyTransferDiagnosis
+            --> CDWWork.Inpat.Lodger
     - Flowchart
         - admflowchart.png
     - Selection Criteria

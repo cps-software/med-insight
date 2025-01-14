@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Summary Timeline
+-------------------------------------------------------------------------------
+
+Below is a summary timeline for implementing all 14 extracts and associated reports via CDW integration.
+This plan is high level and will be adjusted to support an agile sprint-based development approach.  
+
+Assumptions:
+  - January 10, 2025 start date
+  - Full compliment of scrum team members
+  - 1 developer
+
+Estimated Completion Date:
+ - November 5, 2025
+
+┌──────────────────────────────────────────────┬───────────┬───────────────────────────────────┐
+│ Phase                                        │ Duration  │ Milestones                        │
+├──────────────────────────────────────────────┼───────────┴───────────────────────────────────┤
+│ Requirements Analysis                        │ 2 weeks   │ Finalized input/output formats    │
+│ Technology Setup                             │ 2 weeks   │ Installed and configured tools    │
+│ Application Design                           │ 1 weeks   │ Completed module design           │
+│ Implementat Initial Extract                  │ 3 weeks   │ Completed coding for all modules  │
+│ Test and Validate Initial Extract            │ 2 weeks   │ All tests passed                  │
+│ Implementat Next Extract                     │ 3 weeks   │ Completed coding for all modules  │
+│ Test & Validate Next Extract                 │ 2 weeks   │ All tests passed                  │
+│ Implement Remaining Extracts (12 * 2)        │ 24 weeks  │ Completed coding for all modules  │
+│ Test & Validate Remaining Extracts (12 * 1)  │ 12 weeks  │ All tests passed                  │
+│ Deployment to Pre-Production and Validate    │ 2 weeks   │ Application live                  │
+│ Deployment to Production                     │ 1 week    │ Application live                  │
+├──────────────────────────────────────────────┼───────────┼───────────────────────────────────┤
+│ Total Estimated Duration                     │ 54 weeks  │                                   │
+└──────────────────────────────────────────────┴───────────┴───────────────────────────────────┘

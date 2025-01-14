@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Introduction
+-------------------------------------------------------------------------------
+
+Monthly DSS VistA Extract via CDS  
+
+VA would like to replace the current method for generating and providing monthly Decision Support System (DSS) extracts to the AITC Mainframe receiving system. This includes both the extract files and any supporting reports.
+
+The current mechanism uses VistA Mumps routines and VistA Mailman to generate and submit the extracts and reports. For DSS, there are 14 extracts that are produced each month for a set of VistA facilities (all facilities?).
+
+Technical spcifications for each extract file are documented in the online document: DSS IMKM 2025.
+
+Current set of monthly DSS extracts:
+ • ADM - Admissions
+ • BCM - Barcode Medication Administration
+ • CLI - Clinic
+ • ECS - Event Capture
+ • IVP - IV
+ • LAB - Laboratory
+ • LBB - Blood Bank
+ • MOV - Physical Movement
+ • PRE - Prescription
+ • PRO - Prosthetics
+ • RAD - Radiology
+ • SUR - Surgery
+ • TRT - Treating Specialty Change
+ • UDP - Unit Dose
+  

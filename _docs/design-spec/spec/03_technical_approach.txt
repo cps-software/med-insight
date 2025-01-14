@@ -1,0 +1,79 @@
+-------------------------------------------------------------------------------
+Technical Approach for Building DSS VistA Extract via CDW
+-------------------------------------------------------------------------------
+
+The following is a step-by-step plan for building a monthly DSS VistA extract via CDW.
+
+1. Requirements Analysis
+    - Define input and output formats:
+        - Input: Microsoft SQL Server database schema
+        - Output: Text-based file formats (CSV, XML, JSON) and reports (PDF, charts)
+    - Define transformation rules (e.g., renaming columns, aggregating data, filtering rows)
+    - Define transmission requirements:
+        - Protocol: FTP, SFTP, or HTTP API
+        - Security: Encryption, authentication
+    - Define reporting needs
+        - Types: Summary, detailed, or graphical reports
+        - Output format: PDF, HTML, or images
+
+
+2. Technology Setup
+- Environment:
+   - Install Python and required libraries.
+   - Set up a virtual environment (venv).
+- Database Access:
+   - Install and configure pyodbc or SQLAlchemy for SQL Server.
+   - Test connectivity to the database using a sample query.
+- Local Database:
+   - Set up SQLite or PostgreSQL for intermediate storage.
+
+3. Application Design
+- Database Layer:
+   - Responsible for SQL Server connectivity and querying.
+   - Libraries: pyodbc or SQLAlchemy.
+- Transformation Layer:
+   - Data manipulation using pandas.
+   - Modular functions for filtering rows, renaming or reformatting columns, and aggregation.
+- Export Layer:
+   - CSV: pandas.to_csv().
+   - XML: xml.etree.ElementTree.
+   - JSON: pandas.to_json() or json module.
+- Transmission Layer:
+   - FTP/SFTP: ftplib or paramiko.
+   - HTTP: requests.
+- Reporting Layer:
+   - Visualization: Matplotlib or Plotly.
+   - PDF Generation: ReportLab or WeasyPrint.
+- Logging and Monitoring:
+   - Library: logging module for application logs.
+   - Purpose: Track data processing, errors, and file transmissions.
+- Configuration Management:
+   - Use a .env file with dotenv library to manage database credentials and configuration.
+
+4. Implementation Plan
+- Database Interaction
+   - Use parameterized queries to fetch data securely.
+- Data Transformation
+   - Clean and reshape the data using pandas.
+- Exporting Data
+Export the transformed data to desired formats.
+- File Transmission
+   - Send files to the mainframe system.
+- Reporting
+   - Generate visualizations.
+
+5. Testing and Validation
+- Unit Testing: Test each module independently.
+- Integration Testing: Validate end-to-end data flow.
+- Performance Testing: Test the application for large datasets.
+- Error Handling: Test error scenarios (e.g., missing files, database timeouts).
+
+6. Deployment
+- Deploy the application to a server or cloud service.
+- Schedule the application using cron (Linux) or Task Scheduler (Windows).
+- Ensure secure storage of credentials and keys using tools like AWS Secrets Manager or environment variables.
+
+7. Maintenance
+- Logging: Monitor logs for operational issues.
+- Enhancements: Regularly update transformation logic and reporting templates.
+- Backup: Schedule regular backups for critical data.
