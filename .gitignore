@@ -6,12 +6,15 @@ node_modules/
 
 # Python
 pycache/ *.pyc
+__pycache__/
 
 #Logs
 *.Log
 
 # Environments
 .env
+.env_local
+.env_cdw
 .venv
 env/
 venv/
