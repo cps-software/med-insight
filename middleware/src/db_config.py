@@ -29,12 +29,3 @@ def close_connection(connection):
     if connection.is_connected():
         connection.close()
         print("MySQL connection is closed")
-
-"""
-DB_CONFIG = {
-    'server': os.getenv('DB_SERVER'),
-    'database': os.getenv('DB_NAME'),
-    'username': os.getenv('DB_USERNAME'),
-    'password': os.getenv('DB_PASSWORD'),
-}
-"""

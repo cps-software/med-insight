@@ -1,8 +1,7 @@
-# Med-Insignt
-Middleware Component
-
+# Middleware Notes
 The middleware component is built using Python. Dependencies are managed using a Python virtual envrioment that has been named "cpsenv" and placed within the root middleware folder (/middleware/cpsenv/).
 
+## Dependency Management
 Dependencies are then managed using pip. To view the currently installed packages:
 ```zsh
 pip list
@@ -20,3 +19,6 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+## ENV Values
+Ask a teammate...

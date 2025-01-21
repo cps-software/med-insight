@@ -2,11 +2,11 @@
 # Author: CPS
 # Last Update: 1/21/25
 
-from constants import SELECT_ALL_Dim_Sta3n, SELECT_COLUMNS_Sta3n
-from constants import SELECT_ALL_Spatient_Spatient, SELECT_COLUMNS_Spatient_Spatient
-from constants import SELECT_INNER_JOIN_Spatient_Sta3n
-from db_config import create_connection, close_connection
-from extract_adm import create_and_write_file
+from src.constants import SELECT_ALL_Dim_Sta3n, SELECT_COLUMNS_Sta3n
+from src.constants import SELECT_ALL_Spatient_Spatient, SELECT_COLUMNS_Spatient_Spatient
+from src.constants import SELECT_INNER_JOIN_Spatient_Sta3n
+from src.db_config import create_connection, close_connection
+from src.extract_adm import create_and_write_file
 import os
 
 

@@ -1,7 +1,7 @@
 # macOS files
 .DS_Store
 
-# Node modules (if using Node.js in frontend or backend)
+# Node modules (if using Node.js)
 node_modules/
 
 # Python
