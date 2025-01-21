@@ -1,9 +1,2 @@
-numpy
-pandas
-flask
-fastapi
-tensorflow
-pytorch
-spacy
-transformers
-scikit-learn
+mysql-connector-python==9.1.0
+python-dotenv==1.0.1

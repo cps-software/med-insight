@@ -1,0 +1,137 @@
+/*
+|--------------------------------------------------------------------------------
+| create_tbl_Spatient_Spatient.sql
+|--------------------------------------------------------------------------------
+| Creating MariaDB table to simulate CDW SQL Server view:
+|   [CDWWork].[Spatient].[Spatient]
+|
+*/
+
+-- set the active database
+USE CDWWork;
+
+-- create table
+CREATE TABLE Spatient_Spatient
+(
+  PatientSID                              int           NOT NULL,
+  PatientIEN                              varchar(50)   NOT NULL,
+  Sta3n                                   smallint      NOT NULL,
+  PatientName                             varchar(30)   NULL,
+  PatientLastName                         varchar(30)   NULL,
+  PatientFirstName                        varchar(30)   NULL,
+  TestPatientFlag                         char(1)       NULL,
+  CDWPossibleTestPatientFlag              char(1)       NULL,
+  VeteranFlag                             char(1)       NULL,
+  PatientType                             varchar(30)   NULL,
+  PatientTypeSID                          int           NULL,
+  PatientICN                              varchar(50)   NULL,
+  ScrSSN                                  varchar(20)   NULL,
+  PatientSSN                              varchar(20)   NULL,
+  PseudoSSNReason                         varchar(50)   NULL,
+  SSNVerificationStatus                   varchar(50)   NULL,
+  GovernmentEmployeeFlag                  char(1)       NULL,
+  SensitiveFlag                           char(1)       NULL,
+  Age                                     numeric(9)    NULL,
+  BirthDateTime                           datetime      NULL,
+  BirthVistaErrorDate                     varchar(50)   NULL,
+  BirthDateTimeTransformSID               bigint        NULL,
+  DeceasedFlag                            char(1)       NULL,
+  DeathDateTime                           datetime      NULL,
+  DeathVistaErrorDate                     varchar(50)   NULL,
+  DeathDateTimeTransformSID               bigint        NULL,
+  DeathEnteredByStaffSID                  int           NULL,
+  DeathNotificationSource                 varchar(30)   NULL,
+  DeathDocumentationType                  varchar(30)   NULL,
+  DeathModifiedDateTime                   datetime      NULL,
+  DeathModifiedVistaErrorDate             varchar(30)   NULL,
+  DeathModifiedDateTimeTransformSID       bigint        NULL,
+  DeathLastUpdatedByStaffSID              int           NULL,
+  Gender                                  char(1)       NULL,
+  SelfIdentifiedGender                    varchar(20)   NULL,
+  Religion                                varchar(20)   NULL,
+  ReligionSID                             int           NULL,
+  MaritalStatus                           varchar(25)   NULL,
+  MaritalStatusSID                        int           NULL,
+  CollateralSponsorPatientSID             int           NULL,
+  CurrentEnrollmentSID                    bigint        NULL,
+  MeansTestStatus                         varchar(30)   NULL,
+  CurrentMeansTestStatusSID               int           NULL,
+  PeriodOfService                         varchar(30)   NULL,
+  PeriodOfServiceSID                      int           NULL,
+  OperationDesertShieldRank               varchar(30)   NULL,
+  ODSRankType                             varchar(20)   NULL,
+  ODSRecalledCode                         varchar(20)   NULL,
+  ODSTreatmentDateTime                    datetime      NULL,
+  ODSTreatmentVistaErrorDate              varchar(30)   NULL,
+  ODSTreatmentDateTimeTransformSID        bigint        NULL,
+  FederalAgencySID                        int           NULL,
+  FilipinoVeteranCode                     varchar(30)   NULL,
+  ServiceConnectedFlag                    char(1)       NULL,
+  Eligibility                             varchar(50)   NULL,
+  EligibilityVACode                       varchar(30)   NULL,
+  EligibilitySID                          int           NULL,
+  EligibilityStatus                       varchar(30)   NULL,
+  EligibilityStatusDateTime               datetime      NULL,
+  EligibilityStatusVistaErrorDate         varchar(50)   NULL,
+  EligibilityStatusDateTimeTransformSID   bigint        NULL,
+  EligibilityVerificationSource           varchar(50)   NULL,
+  EligibilityVerificationMethod           varchar(50)   NULL,
+  EligibilityInterimDateTime              datetime      NULL,
+  EligibilityInterimVistaErrorDate        varchar(30)   NULL,
+  EligibilityInterimDateTimeTransformSID  bigint        NULL,
+  EligibilityEnteredStaffSID              int           NULL,
+  IneligibleReason                        varchar(50)   NULL,
+  IneligibleVAROReason                    varchar(50)   NULL,
+  IneligibleCity                          varchar(30)   NULL,
+  IneligibleStateSID                      int           NULL,
+  IneligibleDateTime                      datetime      NULL,
+  IneligibleVistaErrorDate                varchar(30)   NULL,
+  IneligibleDateTimeTransformSID          bigint        NULL,
+  IneligibleSource                        varchar(30)   NULL,
+  PatientMissingSource                    varchar(30)   NULL,
+  PatientMissingDateTime                  datetime      NULL,
+  PatientMissingVistaErrorDate            varchar(30)   NULL,
+  PatientMissingDateTimeTransformSID      bigint        NULL,
+  PatientMissingCity                      varchar(30)   NULL,
+  PatientMissingStateSID                  int           NULL,
+  FugitiveFelonFlag                       char(1)       NULL,
+  FFFEnteredDateTime                      datetime      NULL,
+  FFFEnteredVistaErrorDate                varchar(30)   NULL,
+  FFFEnteredDateTimeTransformSID          bigint        NULL,
+  FFFEnteredStaffSID                      int           NULL,
+  FFFRemovedReason                        varchar(30)   NULL,
+  FFFRemovedDateTime                      datetime      NULL,
+  FFFRemovedVistaErrorDate                varchar(30)   NULL,
+  FFFRemovedDateTimeTransformSID          bigint        NULL,
+  FFFRemovedStaffSID                      int           NULL,
+  PatientEnteredByStaffSID                int           NULL,
+  PatientEnteredCode                      varchar(50)   NULL,
+  PatientEnteredRemark                    varchar(50)   NULL,
+  PatientEnteredDateTime                  datetime      NULL,
+  PatientEnteredVistaErrorDate            varchar(30)   NULL,
+  PatientEnteredDateTimeTransformSID      bigint        NULL,
+  DuplicateRecordStatus                   varchar(30)   NULL,
+  DestinationMergePatientSID              int           NULL,
+  PreferredInstitutionSID                 int           NULL,
+  PreferredInstitutionSource              varchar(30)   NULL,
+  EmergencyResponseIndicator              varchar(20)   NULL,
+  InsuranceCoverageFlag                   char(1)       NULL,
+  MedicaidEligibleFlag                    char(1)       NULL,
+  MedicaidNumber                          varchar(30)   NULL,
+  MedicaidInquireDateTime                 datetime      NULL,
+  MedicaidInquireVistaErrorDate           varchar(30)   NULL,
+  MedicaidInquireDateTimeTransformSID     bigint        NULL,
+  VeteranTransportationProgramFlag        char(1)       NULL,
+    INDEX
+    (
+      PatientSID
+    ),
+        INDEX
+    (
+      PatientIEN
+    ),
+    INDEX
+    (
+      Sta3n
+    )
+);

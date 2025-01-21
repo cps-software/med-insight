@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Requirements Analysis
+-------------------------------------------------------------------------------
+
+Input Formats:
+
+Data Source
+ - Corporate Data Warehouse (CDW)
+
+ - Plan is to transition from VistA systems to CDW for pulling source data
+
+ - To my knowledge, the proper CDW database server is:
+    - vhacdwdwhsql33.vha.med.va.gov/
+
+ - To my knowledge, the applicable database within this server is:
+    - CDWWork
+
+ - The CDWWork data is available via:
+    - Views
+
+Output Formats:
+
+Mary Rose to provide breifing and demonstration of the extract files on 1/16/25.
+

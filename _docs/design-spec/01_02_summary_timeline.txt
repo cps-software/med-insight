@@ -19,9 +19,9 @@ Estimated Completion Date:
 │ Requirements Analysis                        │ 2 weeks   │ Finalized input/output formats    │
 │ Technology Setup                             │ 2 weeks   │ Installed and configured tools    │
 │ Application Design                           │ 1 weeks   │ Completed module design           │
-│ Implementat Initial Extract                  │ 3 weeks   │ Completed coding for all modules  │
+│ Implement Initial Extract                    │ 3 weeks   │ Completed coding for all modules  │
 │ Test and Validate Initial Extract            │ 2 weeks   │ All tests passed                  │
-│ Implementat Next Extract                     │ 3 weeks   │ Completed coding for all modules  │
+│ Implement Next Extract                       │ 3 weeks   │ Completed coding for all modules  │
 │ Test & Validate Next Extract                 │ 2 weeks   │ All tests passed                  │
 │ Implement Remaining Extracts (12 * 2)        │ 24 weeks  │ Completed coding for all modules  │
 │ Test & Validate Remaining Extracts (12 * 1)  │ 12 weeks  │ All tests passed                  │
