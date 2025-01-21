@@ -18,6 +18,7 @@ data = [
     [2, "1984", "2025-01-16", "Bob Smith"],
     [3, "The Great Gatsby", "2025-01-17", "Charlie Brown"],
     [4, "Dylon Goes Electric", "2025-01-17", "Shimmer Patrick"],
+    [5, "Inner Excellence", "2025-01-21", "Jim Murphy"],
 ]
 
 def create_and_write_file():
