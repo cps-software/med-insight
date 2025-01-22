@@ -9,7 +9,6 @@ from src.db_config import create_connection, close_connection
 from src.extract_adm import create_and_write_file
 import os
 
-
 def fetch_all_records():
     """Run query(s) to fetch records from tables in the CDWWork database."""
     connection = create_connection()
