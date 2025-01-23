@@ -2,11 +2,16 @@
 # Author: CPS
 # Last Update: 1/21/25
 
+# import sql query statement constants
 from src.constants import SELECT_ALL_Dim_Sta3n, SELECT_COLUMNS_Sta3n
 from src.constants import SELECT_ALL_Spatient_Spatient, SELECT_COLUMNS_Spatient_Spatient
 from src.constants import SELECT_INNER_JOIN_Spatient_Sta3n
+
+# import helper functions
 from src.db_config import create_connection, close_connection
 from src.extract_adm import create_and_write_file
+
+# import os routines module
 import os
 
 def fetch_all_records():
@@ -16,7 +21,7 @@ def fetch_all_records():
         return
 
     try:       
-        # cursor = connection.cursor()  # return rows as tuples
+        # cursor = connection.cursor()               # return rows as tuples
         cursor = connection.cursor(dictionary=True)  # return rows as key/value pairs
         cursor.execute(SELECT_INNER_JOIN_Spatient_Sta3n)
         records = cursor.fetchall()
@@ -35,7 +40,6 @@ def fetch_all_records():
         close_connection(connection)
 
 def main():
-    """Entry point for this program"""
     print(f"\nStarting main.py... {__name__}\n")
     fetch_all_records()
     print(f"\nExtract files will be written to: {os.getenv('EXTRACT_FOLDER')}")
