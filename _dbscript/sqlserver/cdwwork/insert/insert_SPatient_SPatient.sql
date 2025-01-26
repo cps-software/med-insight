@@ -1,10 +1,7 @@
 /*
 |--------------------------------------------------------------------------------
-| insert_row-Spatient_Spatient.sql
+| insert_Spatient_Spatient.sql
 |--------------------------------------------------------------------------------
-| Insert sample data into table:  Spatient_Spatient
-| Original CDW SQL Server object: CDWWork.SPatient.Spatient
-|
 */
 
 -- Set the active database

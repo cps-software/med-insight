@@ -20,19 +20,11 @@ def fetch_all_records():
         return
 
     try:       
-        # create a cursor
-        cursor = connection.cursor()
-
-        # execute query
-        cursor.execute(SELECT_COLUMNS_Sta3n)
-
-        # fetch all records (into key/value tupples)
-        # columns = [column[0] for column in cursor.description]  # Get column names
-        # records = [dict(zip(columns, row)) for row in cursor.fetchall()]  # Convert to list of dicts
-
-        # fetch all records (into list)
+        # cursor = connection.cursor()               # return rows as tuples
+        cursor = connection.cursor(dictionary=True)  # return rows as key/value pairs
+        cursor.execute(SELECT_INNER_JOIN_Spatient_Sta3n)
         records = cursor.fetchall()
-
+        
         if records:
             print("Records found:")
             for row in records:
@@ -40,7 +32,7 @@ def fetch_all_records():
                 print()
         else:
             print("No records found from this select statement.")
-    except pyodbc.Error as e:
+    except Error as e:
         print(f"Error fetching records: {e}")
     finally:
         cursor.close()

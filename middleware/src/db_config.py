@@ -1,7 +1,6 @@
 # db_config.py
 
-import mysql.connector             # import entire module
-from mysql.connector import Error  # import Error class into global namespace
+import pyodbc                      # import entire module
 from dotenv import load_dotenv     # import load_dotenv function
 import os                          # import entire module
 
@@ -10,22 +9,38 @@ load_dotenv()
 
 def create_connection():
     """Creates and returns a connection to the MySQL database."""
+
+    # Print driver f-string for debugging
+    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+    
+    # Print environment variables for debugging
+    print("DB_SERVER:", os.getenv('DB_SERVER'))
+    print("DB_NAME:", os.getenv('DB_NAME'))
+    print("DB_USER:", os.getenv('DB_USER'))
+    print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
+    print("TRUST_CERT:", os.getenv('TRUST_CERT'))
+    print()
+
     try:
-        connection = mysql.connector.connect(
-            host=os.getenv('DB_SERVER'),       # get from .env
-            database=os.getenv('DB_NAME'),     # get from .env
-            user=os.getenv('DB_USER'),         # get from .env
-            password=os.getenv('DB_PASSWORD')  # get from .env
+        connection_string = (
+            f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+            f"SERVER={os.getenv('DB_SERVER')};"
+            f"DATABASE={os.getenv('DB_NAME')};"
+            f"UID={os.getenv('DB_USER')};"   
+            f"PWD={os.getenv('DB_PASSWORD')};"
+            f"TrustServerCertificate={os.getenv('TRUST_CERT')};"
         )
-        if connection.is_connected():
-            print("Successfully connected to the database")
-            return connection
-    except Error as e:
-        print(f"Error while connecting to MySQL: {e}")
+        connection = pyodbc.connect(connection_string)
+        print("Successfully connected to the database")
+        return connection
+    except pyodbc.Error as e:
+        print(f"Error while connecting to SQL Server: {e}")
         return None
 
 def close_connection(connection):
     """Closes the given database connection."""
-    if connection.is_connected():
+    try:
         connection.close()
-        print("MySQL connection is closed")
+        print("SQL Server connection is closed")
+    except pyodbc.Error as e:
+        print(f"Error while closing the connection: {e}")
