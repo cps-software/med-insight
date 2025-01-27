@@ -1,6 +1,6 @@
 /*
 |------------------------------------------------------------
-| create_Dim_Sta3n.sql
+| create_Dim_VistASite.sql
 |------------------------------------------------------------
 */
 
@@ -9,28 +9,24 @@ USE CDWWork;
 GO
 
 -- Create table in the Dim schema
-CREATE TABLE Dim.Sta3n
+CREATE TABLE Dim.VistASite
 (
     Sta3n               SMALLINT       NOT NULL,
-    Sta3nName           VARCHAR(50)    NULL,
-    VISNPreFY15         SMALLINT       NULL,
-    VISNFY16            SMALLINT       NULL,
-    VISNFY17            SMALLINT       NULL,
+    Facility            VARCHAR(50)    NULL,
+    VISN                SMALLINT       NULL,
     Active              CHAR(1)        NULL,
     NextSta3n           INT            NULL,
+    Region              SMALLINT       NULL,
     TimeZone            VARCHAR(100)   NULL,
     SiteCode            VARCHAR(100)   NULL,
-    RegionFY15          SMALLINT       NULL,
-    DistrictNameFY16    VARCHAR(100)   NULL,
-    DistrictNumberFY16  VARCHAR(100)   NULL,
-    DistrictNameFY17    VARCHAR(100)   NULL,
-    DistrictNumberFY17  VARCHAR(100)   NULL,
+    DistrictNumber      VARCHAR(100)   NULL,
+    DistrictName        VARCHAR(100)   NULL,
     City                VARCHAR(100)   NULL,
     StateSID            INT            NULL
 );
 GO
 
 -- Create indexes
-CREATE INDEX IX_Sta3n ON Dim.Sta3n (Sta3n);
-CREATE INDEX IX_Sta3nName ON Dim.Sta3n (Sta3nName);
+CREATE INDEX IX_Sta3n ON Dim.VistASite (Sta3n);
+CREATE INDEX IX_Facility ON Dim.VistASite (Facility);
 GO

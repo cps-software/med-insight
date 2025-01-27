@@ -1,9 +1,8 @@
 /*
 |--------------------------------------------------------------------------------
-| insert_row-Dim_Sta3n.sql
+| insert_Dim_Sta3n.sql
 |--------------------------------------------------------------------------------
 | Insert sample data into table:  Dim_Sta3n
-| Original CDW SQL Server object: CDWWork.Dim.Sta3n
 |
 */
 
