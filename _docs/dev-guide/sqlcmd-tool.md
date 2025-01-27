@@ -2,30 +2,25 @@
 
 The sqlcmd utility lets you enter Transact-SQL statements, system procedures, and script files through various modes:
 
-At the command prompt.
-In Query Editor in SQLCMD mode.
-In a Windows script file.
-In an operating system (cmd.exe) job step of a SQL Server Agent job.
+- At the command prompt
+- In Query Editor in SQLCMD mode
+- In a Windows script file
+- In an operating system (cmd.exe) job step of a SQL Server Agent job
 
 ### Find out which version you have installed
 There are two versions of sqlcmd:
 
-The go-mssqldb-based sqlcmd, sometimes styled as go-sqlcmd. This version is a standalone tool you can download independently of SQL Server.
-
-The ODBC-based sqlcmd, available with SQL Server or the Microsoft Command Line Utilities, and part of the mssql-tools package on Linux.
+- The go-mssqldb-based sqlcmd, sometimes styled as go-sqlcmd, a standalone tool you can download independently of SQL Server.
+- The ODBC-based sqlcmd, available with SQL Server or the Microsoft Command Line Utilities, and part of the mssql-tools package on Linux.
 
 To determine the version you have installed, run the following statement at the command line:
 
 ```bash
-sqlcmd "-?"
+sqlcmd "--version"
 ```
 
 If you're using the new version of sqlcmd (Go), the output is similar to the following example:
 `Version: 1.3.1`
-
-Check version
-You can use `sqlcmd --version` to determine which version is installed.
-You should have at least version 1.0.0 installed.
 
 ### Download and install sqlcmd
 sqlcmd (Go) can be installed cross-platform, on Microsoft Windows, macOS, and Linux. 
@@ -54,6 +49,7 @@ Install/Create, Query, Uninstall SQL Server:
   sqlcmd open ads
   sqlcmd query "SELECT @@version"
   sqlcmd delete
+
 # View configuration information and connection strings
   sqlcmd config view
   sqlcmd config cs
@@ -68,13 +64,6 @@ Available Commands:
   query       Run a query against the current context
   start       Start current context
   stop        Stop current context
-
-Flags:
-  -?, --?                  help for backwards compatibility flags (-S, -U, -E etc.)
-  -h, --help               help for sqlcmd
-      --sqlconfig string   configuration file (default "/Users/<currentUser>/.sqlcmd/sqlconfig")
-      --verbosity int      log level, error=0, warn=1, info=2, debug=3, trace=4 (default 2)
-      --version            print version of sqlcmd
 
 Use "sqlcmd [command] --help" for more information about a command.
 
