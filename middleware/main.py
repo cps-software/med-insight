@@ -1,10 +1,8 @@
 # main.py
 """Main application for DSS extract ETL functions"""
 
-# import sql query statement constants
-from src.constants import SELECT_ALL_Dim_Sta3n, SELECT_COLUMNS_Sta3n
-from src.constants import SELECT_ALL_Spatient_Spatient, SELECT_COLUMNS_Spatient_Spatient
-from src.constants import SELECT_INNER_JOIN_Spatient_Sta3n
+# import sql query statement and other constants
+from src.constants import *
 
 # import helper functions
 from src.db_config import create_connection, close_connection
@@ -24,7 +22,7 @@ def fetch_all_records():
         cursor = connection.cursor()
 
         # execute query
-        cursor.execute(SELECT_COLUMNS_Sta3n)
+        cursor.execute(ADM_QUERY_01)
 
         # fetch all records (into key/value tupples)
         # columns = [column[0] for column in cursor.description]  # Get column names
@@ -34,12 +32,15 @@ def fetch_all_records():
         records = cursor.fetchall()
 
         if records:
-            print("Records found:")
+            print("Records found:\n")
+            print(f"{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}")
             for row in records:
                 print(row)
-                print()
         else:
             print("No records found from this select statement.")
+
+        print()
+
     except pyodbc.Error as e:
         print(f"Error fetching records: {e}")
     finally:
@@ -48,6 +49,7 @@ def fetch_all_records():
 
 def main():
     print(f"\nStarting main.py... {__name__}\n")
+
     fetch_all_records()
     print(f"\nExtract files will be written to: {os.getenv('EXTRACT_FOLDER')}")
     create_and_write_file()

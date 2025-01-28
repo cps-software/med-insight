@@ -14,12 +14,12 @@ def create_connection():
     f"DRIVER={{ODBC Driver 18 for SQL Server}};"
     
     # Print environment variables for debugging
-    print("DB_SERVER:", os.getenv('DB_SERVER'))
-    print("DB_NAME:", os.getenv('DB_NAME'))
-    print("DB_USER:", os.getenv('DB_USER'))
-    print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
-    print("TRUST_CERT:", os.getenv('TRUST_CERT'))
-    print()
+    # print("DB_SERVER:", os.getenv('DB_SERVER'))
+    # print("DB_NAME:", os.getenv('DB_NAME'))
+    # print("DB_USER:", os.getenv('DB_USER'))
+    # print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
+    # print("TRUST_CERT:", os.getenv('TRUST_CERT'))
+    # print()
 
     try:
         connection_string = (
