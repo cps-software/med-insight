@@ -11,7 +11,10 @@ from src.extract_adm import create_and_write_file
 # import os routines module
 import os
 
-def fetch_all_records():
+# import odbc driver module
+import pyodbc
+
+def fetch_all_records(station):
     """Run query(s) to fetch records from tables in the CDWWork database."""
     connection = create_connection()
     if connection is None:
@@ -22,7 +25,7 @@ def fetch_all_records():
         cursor = connection.cursor()
 
         # execute query
-        cursor.execute(ADM_QUERY_01)
+        cursor.execute(ADM_QUERY_01, station)
 
         # fetch all records (into key/value tupples)
         # columns = [column[0] for column in cursor.description]  # Get column names
@@ -48,9 +51,8 @@ def fetch_all_records():
         close_connection(connection)
 
 def main():
-    print(f"\nStarting main.py... {__name__}\n")
-
-    fetch_all_records()
+    station = input("\nPlease enter a VistA Station Number: ")
+    fetch_all_records(station)
     print(f"\nExtract files will be written to: {os.getenv('EXTRACT_FOLDER')}")
     create_and_write_file()
     print("\nmain.py complete...\n")

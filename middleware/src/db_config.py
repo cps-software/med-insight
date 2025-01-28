@@ -29,7 +29,7 @@ def create_connection():
             f"DATABASE={os.getenv('DB_NAME')};"
             f"UID={os.getenv('DB_USER')};"
             f"PWD={os.getenv('DB_PASSWORD')};"
-            f"TrustedConnection={os.getenv('TRUST_CONNECTION')};"
+            # f"Trusted_Connection={os.getenv('TRUST_CONNECTION')};"
             f"TrustServerCertificate={os.getenv('TRUST_CERT')};"
         )
         connection = pyodbc.connect(connection_string)
