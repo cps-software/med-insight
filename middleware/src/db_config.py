@@ -9,9 +9,6 @@ load_dotenv()
 
 def create_connection():
     """Creates and returns a connection to the MySQL database."""
-
-    # Print driver f-string for debugging (to-do: make this an env variable)
-    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
     
     # Print environment variables for debugging
     # print("DB_SERVER:", os.getenv('DB_SERVER'))

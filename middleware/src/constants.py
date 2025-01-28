@@ -47,7 +47,9 @@ ADM_QUERY_01 = """
     FROM Inpat.PatientTransfer
     INNER JOIN Dim.VistASite ON Inpat.PatientTransfer.Sta3n = Dim.VistASite.Sta3n
     INNER JOIN SPatient.SPatient ON Inpat.PatientTransfer.PatientSID = SPatient.Spatient.PatientSID
-    WHERE Inpat.PatientTransfer.Sta3n = ? and Inpat.PatientTransfer.PatientTransferDateTime > '2025-01-01'
+    WHERE Inpat.PatientTransfer.Sta3n = ?
+        and Inpat.PatientTransfer.PatientTransferDateTime >= ?
+        and Inpat.PatientTransfer.PatientTransferDateTime <= ?
     ORDER BY Inpat.PatientTransfer.PatientTransferDateTime;
 """
 

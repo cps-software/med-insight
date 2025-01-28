@@ -14,7 +14,7 @@ import os
 # import odbc driver module
 import pyodbc
 
-def fetch_all_records(station):
+def fetch_all_records(station, start_date, end_date):
     """Run query(s) to fetch records from tables in the CDWWork database."""
     connection = create_connection()
     if connection is None:
@@ -25,7 +25,7 @@ def fetch_all_records(station):
         cursor = connection.cursor()
 
         # execute query
-        cursor.execute(ADM_QUERY_01, station)
+        cursor.execute(ADM_QUERY_01, station, start_date, end_date)
 
         # fetch all records (into key/value tupples)
         # columns = [column[0] for column in cursor.description]  # Get column names
@@ -51,10 +51,16 @@ def fetch_all_records(station):
         close_connection(connection)
 
 def main():
-    station = input("\nPlease enter a VistA Station Number: ")
-    fetch_all_records(station)
+    station = input("\n   Please enter a VistA Station Number: ")
+    start_date = input("  Please enter start date (YYYY-MM-DD): ")
+    end_date = input("    Please enter end date (YYYY-MM-DD): ")
+    print()
+    
+    fetch_all_records(station, start_date, end_date)
+    
     print(f"\nExtract files will be written to: {os.getenv('EXTRACT_FOLDER')}")
     create_and_write_file()
+
     print("\nmain.py complete...\n")
 
 if __name__ == "__main__":

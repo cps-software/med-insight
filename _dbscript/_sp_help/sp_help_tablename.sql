@@ -9,7 +9,8 @@
 */
 
 sp_help 'Dim.Sta3n'
-sp_help 'Dim.VistASite';
+sp_help 'Dim.VistASite'
+sp_help 'Dim.WardLocation'
 sp_help 'Inpat.PatientTransfer'
-sp_help 'Spatient.Spatient';
+sp_help 'Spatient.Spatient'
 
