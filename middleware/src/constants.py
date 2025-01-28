@@ -25,10 +25,10 @@ ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_01 = """
-    SELECT Dim.VistASite.DistrictNumber,
-           Inpat.PatientTransfer.PatientMovementIEN,
+    SELECT Dim.VistASite.DistrictNumber AS District,
+           Inpat.PatientTransfer.PatientMovementIEN AS PatMovIEN,
            SPatient.Spatient.PatientSSN,           
-           LEFT(SPatient.SPatient.PatientLastName, 4),
+           LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
            'I' AS InOutPatientIndicator,
            REPLACE(CONVERT(VARCHAR(10), Inpat.PatientTransfer.PatientTransferDateTime, 120), '-', ''),
            '' AS PrimaryCareTeam,

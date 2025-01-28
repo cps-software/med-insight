@@ -10,7 +10,7 @@ load_dotenv()
 def create_connection():
     """Creates and returns a connection to the MySQL database."""
 
-    # Print driver f-string for debugging
+    # Print driver f-string for debugging (to-do: make this an env variable)
     f"DRIVER={{ODBC Driver 18 for SQL Server}};"
     
     # Print environment variables for debugging
@@ -18,6 +18,7 @@ def create_connection():
     # print("DB_NAME:", os.getenv('DB_NAME'))
     # print("DB_USER:", os.getenv('DB_USER'))
     # print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
+    # print("TRUST_CONNECTION:", os.getenv('TRUST_CONNECTION'))
     # print("TRUST_CERT:", os.getenv('TRUST_CERT'))
     # print()
 
@@ -26,8 +27,9 @@ def create_connection():
             f"DRIVER={{ODBC Driver 18 for SQL Server}};"
             f"SERVER={os.getenv('DB_SERVER')};"
             f"DATABASE={os.getenv('DB_NAME')};"
-            f"UID={os.getenv('DB_USER')};"   
+            f"UID={os.getenv('DB_USER')};"
             f"PWD={os.getenv('DB_PASSWORD')};"
+            f"TrustedConnection={os.getenv('TRUST_CONNECTION')};"
             f"TrustServerCertificate={os.getenv('TRUST_CERT')};"
         )
         connection = pyodbc.connect(connection_string)
