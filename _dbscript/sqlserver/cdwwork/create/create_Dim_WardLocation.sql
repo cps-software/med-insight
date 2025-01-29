@@ -19,7 +19,7 @@ CREATE TABLE Dim.WardLocation
     DivisionName       varchar(100)   NULL,
     Sta6a              varchar(50)    NULL,
     SpecialtySID       int            NULL,
-    Secialty           varchar(50)    NULL,
+    Specialty          varchar(50)    NULL,
     BedSection         varchar(50)    NULL,
     MedicalService     varchar(50)    NULL,
     PrimaryLocation    varchar(50)    NULL,
