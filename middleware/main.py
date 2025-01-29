@@ -36,9 +36,9 @@ def fetch_all_records(station, start_date, end_date):
 
         if records:
             print("Records found:\n")
-            print(f"{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}")
+            print(f"{GREEN}{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}{RESET}")
             for row in records:
-                print(row)
+                print(f"{GREEN}{row}{RESET}")
         else:
             print("No records found from this select statement.")
 
@@ -51,9 +51,9 @@ def fetch_all_records(station, start_date, end_date):
         close_connection(connection)
 
 def main():
-    station = input("\n   Please enter a VistA Station Number: ")
-    start_date = input("  Please enter start date (YYYY-MM-DD): ")
-    end_date = input("    Please enter end date (YYYY-MM-DD): ")
+    station = input(f"{YELLOW}\n   Please enter a VistA Station Number: {RESET}")
+    start_date = input(f"{YELLOW}  Please enter start date (YYYY-MM-DD): {RESET}")
+    end_date = input(f"{YELLOW}    Please enter end date (YYYY-MM-DD): {RESET}")
     print()
     
     fetch_all_records(station, start_date, end_date)
