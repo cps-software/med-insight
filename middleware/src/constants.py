@@ -62,6 +62,21 @@ ADM_QUERY_01 = """
 """
 
 ADM_QUERY_02 = """
+    SELECT Dim.Division.DivisionIEN,
+           Spatient.Spatient.PatientSID,
+           Spatient.SPatient.PatientIEN,
+           Spatient.Spatient.Sta3n
+    FROM Inpat.PatientTransfer
+    INNER JOIN Spatient.Spatient ON Inpat.PatientTransfer.PatientSID = Spatient.Spatient.PatientSID
+    INNER JOIN Dim.WardLocation ON Inpat.PatientTransfer.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
+    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = Dim.Division.DivisionSID
+    WHERE Inpat.PatientTransfer.Sta3n = ?
+        and Inpat.PatientTransfer.PatientTransferDateTime >= ?
+        and Inpat.PatientTransfer.PatientTransferDateTime <= ?
+    ORDER BY Inpat.PatientTransfer.PatientTransferDateTime;
+"""
+
+ADM_QUERY_03 = """
     SELECT SPatient.SPatient.PatientSID,
            SPatient.SPatient.PatientIEN,
            SPatient.SPatient.PatientName,
