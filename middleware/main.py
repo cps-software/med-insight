@@ -25,7 +25,7 @@ def fetch_all_records(station, start_date, end_date):
         cursor = connection.cursor()
 
         # execute query
-        cursor.execute(ADM_QUERY_02, station, start_date, end_date)
+        cursor.execute(ADM_QUERY_01, station, start_date, end_date)
 
         # fetch all records (into key/value tupples)
         # columns = [column[0] for column in cursor.description]  # Get column names
