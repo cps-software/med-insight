@@ -35,37 +35,37 @@ ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_01 = """
-    SELECT Dim.Division.DivisionIEN AS Division,
-           Spatient.SPatient.PatientIEN,
-           SPatient.Spatient.PatientSSN,       
-           LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
-           'I' AS InOutPatientIndicator,
-           REPLACE(CONVERT(VARCHAR(10), Inpat.PatientTransfer.PatientTransferDateTime, 120), '-', ''),
+    SELECT d.DivisionIEN AS Division,
+           sp.PatientIEN,
+           sp.PatientSSN,       
+           LEFT(sp.PatientLastName, 4) AS LName4,
+           'I' AS InOutPatient,
+           REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
            '' AS PrimaryCareTeam,
-           Spatient.Spatient.Gender,
-           REPLACE(CONVERT(VARCHAR(10), Spatient.Spatient.BirthDateTime, 120), '-', ''),
+           sp.Gender,
+           REPLACE(CONVERT(VARCHAR(10), sp.BirthDateTime, 120), '-', '') AS PatientBirthDate,
            '' AS Religion,
-           SPatient.SpatientInsurance.EmploymentStatus,
+           pa.EmploymentStatus,
            '1' AS HealthInsurance,
            '39' AS StateCode,
            '100' AS CountyCode,
            '12345' AS ZipCode,
-           Inpat.PatientTransfer.Sta3n,
-           Dim.VistASite.Facility,
-           Inpat.PatientTransfer.InpatientSID,
-           Inpat.PatientTransfer.OrdinalNumber,
-           Inpat.PatientTransfer.PatientSID,
-           SPatient.Spatient.PatientName
-    FROM Inpat.PatientTransfer
-    INNER JOIN SPatient.SPatient ON Inpat.PatientTransfer.PatientSID = SPatient.Spatient.PatientSID
-    INNER JOIN SPatient.SPatientInsurance ON Inpat.PatientTransfer.PatientSID = SPatient.SpatientInsurance.PatientSID
-    INNER JOIN Dim.WardLocation ON Inpat.PatientTransfer.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
-    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = Dim.Division.DivisionSID
-    INNER JOIN Dim.VistASite ON Inpat.PatientTransfer.Sta3n = Dim.VistASite.Sta3n
-    WHERE Inpat.PatientTransfer.Sta3n = ?
-        and Inpat.PatientTransfer.PatientTransferDateTime >= ?
-        and Inpat.PatientTransfer.PatientTransferDateTime <= ?
-    ORDER BY Inpat.PatientTransfer.PatientTransferDateTime;
+           pt.Sta3n,
+           vs.Facility,
+           pt.InpatientSID,
+           pt.OrdinalNumber,
+           pt.PatientSID,
+           sp.PatientName
+    FROM Inpat.PatientTransfer AS pt
+    INNER JOIN SPatient.SPatient AS sp ON pt.PatientSID = sp.PatientSID
+    INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
+    INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
+    INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
+    INNER JOIN Dim.VistASite AS vs ON pt.Sta3n = vs.Sta3n
+    WHERE pt.Sta3n = ?
+        and pt.PatientTransferDateTime >= ?
+        and pt.PatientTransferDateTime <= ?
+    ORDER BY pt.PatientTransferDateTime;
 """
 
 ADM_QUERY_02 = """

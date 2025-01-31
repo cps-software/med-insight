@@ -13,20 +13,45 @@ Assumptions:
 Estimated Completion Date:
  - November 5, 2025
 
-┌──────────────────────────────────────────────┬───────────┬───────────────────────────────────┐
-│ Phase                                        │ Duration  │ Milestones                        │
-├──────────────────────────────────────────────┼───────────┴───────────────────────────────────┤
-│ Requirements Analysis                        │ 2 weeks   │ Finalized input/output formats    │
-│ Technology Setup                             │ 2 weeks   │ Installed and configured tools    │
-│ Application Design                           │ 1 weeks   │ Completed module design           │
-│ Implement Initial Extract                    │ 3 weeks   │ Completed coding for all modules  │
-│ Test and Validate Initial Extract            │ 2 weeks   │ All tests passed                  │
-│ Implement Next Extract                       │ 3 weeks   │ Completed coding for all modules  │
-│ Test & Validate Next Extract                 │ 2 weeks   │ All tests passed                  │
-│ Implement Remaining Extracts (12 * 2)        │ 24 weeks  │ Completed coding for all modules  │
-│ Test & Validate Remaining Extracts (12 * 1)  │ 12 weeks  │ All tests passed                  │
-│ Deployment to Pre-Production and Validate    │ 2 weeks   │ Application live                  │
-│ Deployment to Production                     │ 1 week    │ Application live                  │
-├──────────────────────────────────────────────┼───────────┼───────────────────────────────────┤
-│ Total Estimated Duration                     │ 54 weeks  │                                   │
-└──────────────────────────────────────────────┴───────────┴───────────────────────────────────┘
+┌─────┬────────────────────────────────────────────┬──────────┬───────────────┬──────┬───────────────────────────────────┐
+│ WBS │ Phase                                      │ Duration │ Period        │ Pred │ Milestones                        │
+├─────┼────────────────────────────────────────────┼──────────┼───────────────┼──────┼───────────────────────────────────┤
+│ 1   | Project Startup                            │ 1 week   │ 01/13 - 01/17 │      │ Finalized input/output formats    │
+│ 2   | Requirements Analysis                      │ 1 week   │ 01/13 - 01/17 │      │ Finalized input/output formats    │
+│ 2.1 |   Capture Requirements in Jira             │ 1 week   │ 01/13 - 01/17 │      │ Finalized input/output formats    │
+│ 2.2 |   Review Requirements with Stakeholders    │ 1 week   │ 01/13 - 01/17 │      │ Finalized input/output formats    │
+│ 3   | Technical Approach                         │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 3.1 |   Evaluate ETL Pipeline Options            │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 3.2 |   Identify Hardware/Software Needed        │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 4   | Data Analysis                              │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 4.1 |   VistA to CDW Mapping                     │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 4.2 |   Data Gap Analysis                        │ 2 weeks  │ 01/13 - 01/25 │      │ Finalized input/output formats    │
+│ 5   | Technology Setup                           │ 2 weeks  │               │      │ Installed and configured tools    │
+│ 6   | Application Design                         │ 1 weeks  │               │      │ Completed module design           │
+│ 7   | Implement ADM Extract & Reports            │ 3 weeks  │               │      │ Completed coding for all modules  │
+│ 7.1 |   Design                                   │ 2 weeks  │               │      │ All tests passed                  │
+│ 7.2 |   Code & Unit Test                         │ 2 weeks  │               │      │ All tests passed                  │
+│ 7.3 |   Validate & Approve                       │ 2 weeks  │               │      │ All tests passed                  │
+│ 7.4 |   Deploy to Pre-Production and Validate    │ 2 weeks  │               │      │ All tests passed                  │
+│ 4   | Implement CLI Extract & Reports            │ 3 weeks  │               │      │ Completed coding for all modules  │
+│ 5   |   Design                                   │ 2 weeks  │               │      │ All tests passed                  │
+│ 5   |   Code & Unit Test                         │ 2 weeks  │               │      │ All tests passed                  │
+│ 5   |   Validate & Approve                       │ 2 weeks  │               │      │ All tests passed                  │
+│ 6   |   Deploy to Pre-Production and Validate    │ 2 weeks  │               │      │ All tests passed                  │
+│ 4   | Implement Remaining Extracts & Reports     │ 3 weeks  │               │      │ Completed coding for all modules  │
+│ 5   |   Design                                   │ 2 weeks  │               │      │ All tests passed                  │
+│ 5   |   Code & Unit Test                         │ 2 weeks  │               │      │ All tests passed                  │
+│ 5   |   Validate & Approve                       │ 2 weeks  │               │      │ All tests passed                  │
+│ 6   |   Deploy to Pre-Production and Validate    │ 2 weeks  │               │      │ All tests passed                  │
+│ 6   | Project Wrap-Up & Completion               │ 2 weeks  │               │      │ All tests passed                  │
+├─────┼────────────────────────────────────────────┼──────────┼───────────────┼──────┼───────────────────────────────────┤
+│     │ Total Estimated Duration                   │ 54 weeks │ 01/13 - 10/25 │      │ Project Complete                  │
+└─────┴────────────────────────────────────────────┴──────────┴───────────────┴──────┴───────────────────────────────────┘
+
+
+
+
+
+
+
+
