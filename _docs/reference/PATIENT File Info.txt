@@ -1,0 +1,36 @@
+GLOBAL MAP DATA DICTIONARY #2 -- PATIENT FILE                                                                     1/30/25    PAGE 1
+STORED IN ^DPT(  (4248 ENTRIES)   SITE: Albany IRM/DEVVCC Field Office   UCI: DEVVCC,DEVVCC                        (VERSION 5.3)   
+-----------------------------------------------------------------------------------------------------------------------------------
+The PATIENT file contains all the patients followed by the medical center/ Outpatient clinic.  At a minimum each patient entry must
+have a NAME, DATE OF BIRTH and SOCIAL SECURITY NUMBER.  In order to add a new patient to the PATIENT file the user must also
+indicate whether or not the patient is requesting to receive care as a VETERAN of the U.S. Armed Forces and specify the TYPE of
+patient being added to the system.  For the most part the information contained in this file is demographic in nature, i.e.,
+address, employment, service history, etc., however data concerning admissions, appointments,etc., is also stored in this file.  
+The ADMISSION sub-field is scheduled to be moved into the new PATIENT MOVEMENT file by the end of calendar year 1989.  Care should
+be used when removing a patient from the PATIENT file since virtually all other DHCP modules do utilize data from this file.  Of
+the many fields in the file you will note that many are preceeded by an asterisk.  Those fields are scheduled to be removed from
+the file due to either lack of use or replacement by another field/file in the next release.  
+
+
+^DPT(D0,0)= (#.01) NAME [1F] ^ (#.02) SEX [2S] ^ (#.03) DATE OF BIRTH [3D] ^  ^ (#.05) MARITAL STATUS [5P:11] ^ (#.06) RACE 
+         ==>[6P:10] ^ (#.07) OCCUPATION [7F] ^ (#.08) RELIGIOUS PREFERENCE [8P:13] ^ (#.09) SOCIAL SECURITY NUMBER [9F] ^ (#.091) 
+         ==>REMARKS [10F] ^ 
+
+
+... and a LOT more.
+
+
+Here are some examples...
+
+Global ^DPT(7172780:7172790,0)
+^DPT(7172780,0)="CAPRI,NEWPT ABC^M^2540102^^^^^^000004565^^^^^1^^^^^^1^1"
+^DPT(7172781,0)="LEOPOLD,HANK^M^2600101^^^^^^733262294^^^^^^^^^^^1"
+^DPT(7172782,0)="TESTXFER,OPEN^F^2820101^^^^^^584930281^^^^^^^^^^^1"
+^DPT(7172783,0)="TESTXFER,NEW^F^2630101^^^^^^876348876^^^^^^^^^^^1"
+^DPT(7172784,0)="CAPRIPATIENT,EIGHTY SR^M^2401124^^^^^^541123123^^^^^^^^^^^1"
+^DPT(7172785,0)="KAY,AMY LONG^M^2900606^^^^^^520776721^^^^^^101125^3170410^^^^1"
+^DPT(7172786,0)="DEACON,URSULA MARGARET^F^2610408^^^^^^520776722^^^^^1^101125^3170410^^^^1"
+^DPT(7172787,0)="AGENTO,DUDE^M^2220502^^^^^^389429999^^^^^^^^^^^1"
+^DPT(7172788,0)="LAXNI,CXEY T^M^2530521^^^^^^101083855^^^^^^123457091^3170428^^^^1"
+^DPT(7172789,0)="BONO,SONNY,^M^2850101^^^^^^254051310^^^^^^^^^^^1"
+^DPT(7172790,0)="YORTY,AMOS E^M^2340609^^5^^^5^129060934P^^BALTIMORE^24^^1^100884^3230420^^^^1"

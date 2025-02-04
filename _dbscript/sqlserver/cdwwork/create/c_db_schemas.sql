@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------------
-| create_schemas.sql
+| create_db_schemas.sql
 |--------------------------------------------------------------------------------
 | Schema owner: sa
 | List schemas: SELECT name AS SchemaName FROM sys.schemas ORDER BY name;

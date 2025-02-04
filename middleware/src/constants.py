@@ -35,7 +35,7 @@ ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_01 = """
-    SELECT d.DivisionIEN AS Division,
+    SELECT div.DivisionIEN AS Division,
            sp.PatientIEN,
            sp.PatientSSN,       
            LEFT(sp.PatientLastName, 4) AS LName4,
@@ -45,13 +45,37 @@ ADM_QUERY_01 = """
            sp.Gender,
            REPLACE(CONVERT(VARCHAR(10), sp.BirthDateTime, 120), '-', '') AS PatientBirthDate,
            '' AS Religion,
-           pa.EmploymentStatus,
+           CASE
+               WHEN pa.EmploymentStatus = 'FULL TIME' THEN '1'
+               WHEN pa.EmploymentStatus = 'PART TIME' THEN '2'
+               WHEN pa.EmploymentStatus = 'RETIRED' THEN '5'
+               ELSE '9'
+           END AS EmpStatus,
            '1' AS HealthInsurance,
            '39' AS StateCode,
            '100' AS CountyCode,
            '12345' AS ZipCode,
            pt.Sta3n,
+           '10' AS EligCode,
+           sp.VeteranFlag,
+           'N' AS Vietnam,
+           'N' AS AgentOrange,
+           '1' AS Radiation,
+           'N' AS POW,
+           '8' AS POSCode,
+           '' AS MeansTest,
+           '2' AS MaritalStatus,
            vs.Facility,
+           '1321' AS Ward,
+           '' AS Placeholder1,
+           '' AS Placeholder2,
+           '' AS Placeholder3,
+           '' AS Placeholder4,
+           '' AS Placeholder5,
+           'N' AS EncounterSHAD,
+           'N' AS PurpleHeart,
+           'N' AS ObservationPt,
+           'RET' AS PtCategory,
            pt.InpatientSID,
            pt.OrdinalNumber,
            pt.PatientSID,
@@ -60,7 +84,7 @@ ADM_QUERY_01 = """
     INNER JOIN SPatient.SPatient AS sp ON pt.PatientSID = sp.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
     INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
-    INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
+    INNER JOIN Dim.Division AS div ON wl.DivisionSID = div.DivisionSID
     INNER JOIN Dim.VistASite AS vs ON pt.Sta3n = vs.Sta3n
     WHERE pt.Sta3n = ?
         and pt.PatientTransferDateTime >= ?

@@ -1,0 +1,14 @@
+@startuml
+
+start
+#lightblue:                       **Connect to CDW**\n            SQL Server + CDWWork database            ;
+#lightblue:              **Prompt for Extract Parameters**            \n                       Station, Data Range;
+#lightblue:    **Get Data from Inpat.PatientTransfer table**   \n         Filter to include Inpatent and Transfer;
+#lightblue:**Get Additional Values from Supporting Tables**\n  Patient Demographics, Treatment Details, etc.;
+#lightblue:       **Transform Data to Applicable Values**\n     Employment Status to numeric codes, etc.     ;
+#lightblue:             **Store Extract Data in Database**             \n                 Extract Details, Extract Log;
+#lightblue:               **Generate Extract Text File**\n    Format with ^ separators and ~ line ending    ;
+#lightblue:             **Transmit File to Target System**            \n                SFTP or other secure method;
+stop
+
+@enduml

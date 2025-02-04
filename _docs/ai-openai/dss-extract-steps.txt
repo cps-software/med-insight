@@ -1,0 +1,55 @@
+Steps for Producing a DSS Extract File
+
+This write-up, provides a summarized technical specification of how the DSS Extracts will be generated from the source CDW data warehouse, and in particular from the CDW "CDWWork" database. There are 14 separate extracts that will be produced each month (or on demand, as needed) using the general flow described below.
+
+The current set of monthly of monthly DSS extracts are:
+ • ADM - Admissions
+ • BCM - Barcode Medication Administration
+ • CLI - Clinic
+ • ECS - Event Capture
+ • IVP - IV
+ • LAB - Laboratory
+ • LBB - Blood Bank
+ • MOV - Physical Movement
+ • PRE - Prescription
+ • PRO - Prosthetics
+ • RAD - Radiology
+ • SUR - Surgery
+ • TRT - Treating Specialty Change
+ • UDP - Unit Dose
+
+Step 1: Select records from Patient Transfer table
+ - Select all Patient Transfer records for a given VistA Station Number and patient transfer date range.
+    - The program prompts user to provide VistA Station Number value.
+    - The program prompts user to provide a start date (YYYYMMDD) for the patient transfer action.
+    - The program prompts user to provide an end date (YYYYMMDD) for the patient transfer action.
+    - These records should only include transfers that indicate "Inpatient" or "Transfer" actions.
+       - The program determines this from a coded field within the the Patient Transfer table or another table using a primary/foreign key relationship
+
+Step 2: Add additional related data to Patient Transfer data
+ - Join the base Patient Transfer table with other supporting tables (that have primary/foreign key relationship) to get additional data elements/fields for things like patient demographics, treatment information, veteran status, employment status, insurance status, and other attributes that will make up the full set of data that meet the selection criteria.
+
+- For some of the values retrieved from supporting tables, map/transform the original values to a set of defined codes, for example, when pulling the employment status attribute from a table, perform the mapping:
+  'Employed Full-Time' is mapped/transformed to: '1'
+  'Employed Part-Time' is mapped/transformed to: '2'
+  'Retired' is mapped/transformed to: '5'
+  'Unknown' is mapped/transformed to '9'
+
+Step 3: Write Selection/Transformation Results to a Database table
+ - Write the results to an "extract results" database table for the indicated extract type, for examle ADM or CLI.
+ - Also add a new record to an extract log table that will be shared by all of the extract types
+    - The extract log table contains applicable data elements, such as a primary key, foreign key(s), the date the extract log record was created, the extract type (e.g., ADM or CLI), and the username of the person who generated the extract.
+
+Step 4: Produce Extract Text File for a Selected Extract record
+ - A user can view all of the extract database records for a given extract type, e.g., ADM or CLI
+   - The user can derive the list based on providing the extract type and a date range to search on
+ - From a viewed list of extracts from the database, the user can select one of the records to use to generate a text-based extract file.
+    - The extract file will be a text file that is formatted with carot characters (^) as the field separators.
+    - At the end of each extracted record line, add a tilde character (~) and a newline.
+
+Step 5: Transmit Extract Text File to Target/Consumer System
+ - Transfer the generated extract text file from the source system to another system that will process the file.
+    - Transfer the file using Secure File Transfer Protocol (SFTP) or other applicable method
+
+Step 6: Support End User Analysis and Visualization of Extract Database
+ - Provide capability for end users to access and work with extract data using a data analysis and/or visualization tools, such as Microsoft SQL Server Management Studio (SSMS), Azure Data Studio, or PowerBI.
