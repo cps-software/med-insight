@@ -51,7 +51,25 @@ def fetch_all_records(station, start_date, end_date):
         close_connection(connection)
 
 def main():
-    station = input(f"{YELLOW}\n   Please enter a VistA Station Number: {RESET}")
+    """
+    The main entry point for program.
+
+    Prompt user for DSS extract processing parameters:
+     - VistA Station
+     - Extract (a specific extract or "all")
+     - Start and end dates for extract date range
+
+     Call a frontend handler function that in turn calls other functions based on input parameters.
+
+     After the above processing completes, write a summary of results to the screen.
+
+    Returns:
+        None
+    """
+    print(f"{YELLOW}\n              ----------------------------------{RESET}")
+    print(f"{YELLOW}               CREATE DSS EXTRACT FROM CDW DATA{RESET}")
+    print(f"{YELLOW}              ----------------------------------\n{RESET}")
+    station = input(f"{YELLOW}   Please enter a VistA Station Number: {RESET}")
     start_date = input(f"{YELLOW}  Please enter start date (YYYY-MM-DD): {RESET}")
     end_date = input(f"{YELLOW}    Please enter end date (YYYY-MM-DD): {RESET}")
     print()
