@@ -65,8 +65,9 @@ ADM_QUERY_01 = """
            '8' AS POSCode,
            '' AS MeansTest,
            '2' AS MaritalStatus,
-           Dim.VistASite.Facility,
-           '1321' AS Ward,
+           Dim.WardLocation.WardLocationIEN,
+           'TrSpec' AS TreatingSpecialty,
+           SStaff.SStaff.StaffIEN,
            '' AS Placeholder1,
            '' AS Placeholder2,
            '' AS Placeholder3,
@@ -87,6 +88,7 @@ ADM_QUERY_01 = """
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
     INNER JOIN Dim.WardLocation ON pt.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
     INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = dim.Division.DivisionSID
+    INNER JOIN SStaff.SStaff ON pt.AttendingPhysicianStaffSID = SStaff.Staff.StaffSID
     INNER JOIN Dim.VistASite ON pt.Sta3n = Dim.VistASite.Sta3n
 
     WHERE pa.OrdinalNumber = (
