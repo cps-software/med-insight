@@ -35,15 +35,15 @@ ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_01 = """
-    SELECT div.DivisionIEN AS Division,
-           sp.PatientIEN,
-           sp.PatientSSN,       
-           LEFT(sp.PatientLastName, 4) AS LName4,
+    SELECT dim.Division.DivisionIEN AS Division,
+           p.PatientIEN,
+           p.PatientSSN,       
+           LEFT(p.PatientLastName, 4) AS LName4,
            'I' AS InOutPatient,
            REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
            '' AS PrimaryCareTeam,
-           sp.Gender,
-           REPLACE(CONVERT(VARCHAR(10), sp.BirthDateTime, 120), '-', '') AS PatientBirthDate,
+           p.Gender,
+           REPLACE(CONVERT(VARCHAR(10), p.BirthDateTime, 120), '-', '') AS PatientBirthDate,
            '' AS Religion,
            CASE
                WHEN pa.EmploymentStatus = 'FULL TIME' THEN '1'
@@ -57,7 +57,7 @@ ADM_QUERY_01 = """
            '12345' AS ZipCode,
            pt.Sta3n,
            '10' AS EligCode,
-           sp.VeteranFlag,
+           p.VeteranFlag,
            'N' AS Vietnam,
            'N' AS AgentOrange,
            '1' AS Radiation,
@@ -65,8 +65,9 @@ ADM_QUERY_01 = """
            '8' AS POSCode,
            '' AS MeansTest,
            '2' AS MaritalStatus,
-           vs.Facility,
-           '1321' AS Ward,
+           Dim.WardLocation.WardLocationIEN,
+           'TrSpec' AS TreatingSpecialty,
+           SStaff.SStaff.StaffIEN,
            '' AS Placeholder1,
            '' AS Placeholder2,
            '' AS Placeholder3,
@@ -79,35 +80,48 @@ ADM_QUERY_01 = """
            pt.InpatientSID,
            pt.OrdinalNumber,
            pt.PatientSID,
-           sp.PatientName
+           p.PatientName
+
     FROM Inpat.PatientTransfer AS pt
-    INNER JOIN SPatient.SPatient AS sp ON pt.PatientSID = sp.PatientSID
+
+    INNER JOIN SPatient.SPatient AS p ON pt.PatientSID = p.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
-    INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
-    INNER JOIN Dim.Division AS div ON wl.DivisionSID = div.DivisionSID
-    INNER JOIN Dim.VistASite AS vs ON pt.Sta3n = vs.Sta3n
-    WHERE pt.Sta3n = ?
+    INNER JOIN Dim.WardLocation ON pt.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
+    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = dim.Division.DivisionSID
+    INNER JOIN SStaff.SStaff ON pt.AttendingPhysicianStaffSID = SStaff.Staff.StaffSID
+    INNER JOIN Dim.VistASite ON pt.Sta3n = Dim.VistASite.Sta3n
+
+    WHERE pa.OrdinalNumber = (
+        SELECT MAX(pa2.OrdinalNumber)
+        FROM SPatient.SPatientAddress AS pa2
+        WHERE pa2.PatientSID = pt.PatientSID 
+    )    
+        and pt.Sta3n = ?
         and pt.PatientTransferDateTime >= ?
         and pt.PatientTransferDateTime <= ?
     ORDER BY pt.PatientTransferDateTime;
 """
 
-ADM_QUERY_02 = """
-    SELECT Dim.Division.DivisionIEN,
-           Spatient.Spatient.PatientSID,
-           Spatient.SPatient.PatientIEN,
-           LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,           
-           Spatient.Spatient.Sta3n
-    FROM Inpat.PatientTransfer
-
-    INNER JOIN Spatient.Spatient ON Inpat.PatientTransfer.PatientSID = Spatient.Spatient.PatientSID
-    INNER JOIN Dim.WardLocation ON Inpat.PatientTransfer.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
-    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = Dim.Division.DivisionSID
-
-    WHERE Inpat.PatientTransfer.Sta3n = ?
-        and Inpat.PatientTransfer.PatientTransferDateTime >= ?
-        and Inpat.PatientTransfer.PatientTransferDateTime <= ?
-    ORDER BY Inpat.PatientTransfer.PatientTransferDateTime;
+ADM_QUERY_01T = """
+    SELECT
+        # dim.Division.DivisionIEN AS Division,
+        SPatient.SPatient.PatientIEN,
+        SPatient.SPatient.PatientSSN,       
+        LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
+        'I' AS InOutPatient,
+        REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
+        '' AS PrimaryCareTeam,
+        SPatient.SPatient.Gender,
+        REPLACE(CONVERT(VARCHAR(10), SPatient.SPatient.BirthDateTime, 120), '-', '') AS PatientBirthDate,
+        '' AS Religion
+    FROM Inpat.PatientTransfer AS pt
+    INNER JOIN SPatient.SPatient ON pt.PatientSID = SPatient.SPatient.PatientSID
+    INNER JOIN Dim.WardLocation ON pt.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
+    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = dim.Division.DivisionSID
+    WHERE pt.Sta3n = ?
+        and pt.PatientTransferDateTime >= ?
+        and pt.PatientTransferDateTime <= ?
+    ORDER BY pt.PatientTransferDateTime;
 """
 
 ADM_QUERY_03 = """

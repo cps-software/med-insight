@@ -21,3 +21,7 @@ GO
 -- CDW Patient tables
 CREATE SCHEMA SPatient;
 GO
+
+-- CDW Staff tables
+CREATE SCHEMA SStaff;
+GO
