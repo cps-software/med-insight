@@ -46,11 +46,23 @@ ADM_QUERY_01 = """
            REPLACE(CONVERT(VARCHAR(10), p.BirthDateTime, 120), '-', '') AS PatientBirthDate,
            '' AS Religion,
            CASE
-               WHEN pa.EmploymentStatus = 'FULL TIME' THEN '1'
-               WHEN pa.EmploymentStatus = 'PART TIME' THEN '2'
+               WHEN pa.EmploymentStatus = 'EMPLOYED FULL TIME' THEN '1'
+               WHEN pa.EmploymentStatus = 'EMPLOYED PART TIME' THEN '2'
+               WHEN pa.EmploymentStatus = 'NOT EMPLOYED' THEN '3'
+               WHEN pa.EmploymentStatus = 'SELF EMPLOYED' THEN '4'
                WHEN pa.EmploymentStatus = 'RETIRED' THEN '5'
+               WHEN pa.EmploymentStatus = 'ACTIVE MILITARY DUTY' THEN '6'
                ELSE '9'
-           END AS EmpStatus,
+           END AS AddressEmpStatus,
+           CASE
+               WHEN pi.EmploymentStatus = 'FULL TIME' THEN '1'
+               WHEN pi.EmploymentStatus = 'PART TIME' THEN '2'
+               WHEN pi.EmploymentStatus = 'NOT EMPLOYED' THEN '3'
+               WHEN pi.EmploymentStatus = 'SELF EMPLOYED' THEN '4'
+               WHEN pi.EmploymentStatus = 'RETIRED' THEN '5'
+               WHEN pi.EmploymentStatus = 'ACTIVE MILITARY' THEN '6'
+               ELSE '9'
+           END AS InsuranceEmpStatus,
            '1' AS HealthInsurance,
            '39' AS StateCode,
            '100' AS CountyCode,
@@ -101,6 +113,7 @@ ADM_QUERY_01 = """
 
     INNER JOIN SPatient.SPatient AS p ON pt.PatientSID = p.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
+    INNER JOIN SPatient.SPatientInsurance AS pi ON pt.PatientSID = pi.PatientSID
     INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
     INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
     INNER JOIN SStaff.SStaff AS s ON pt.AttendingPhysicianStaffSID = s.StaffSID
