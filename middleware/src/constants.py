@@ -35,7 +35,7 @@ ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_01 = """
-    SELECT dim.Division.DivisionIEN AS Division,
+    SELECT d.DivisionIEN AS Division,
            p.PatientIEN,
            p.PatientSSN,       
            LEFT(p.PatientLastName, 4) AS LName4,
@@ -54,7 +54,7 @@ ADM_QUERY_01 = """
            '1' AS HealthInsurance,
            '39' AS StateCode,
            '100' AS CountyCode,
-           '12345' AS ZipCode,
+           pa.Zip4,
            pt.Sta3n,
            '10' AS EligCode,
            p.VeteranFlag,
@@ -62,17 +62,32 @@ ADM_QUERY_01 = """
            'N' AS AgentOrange,
            '1' AS Radiation,
            'N' AS POW,
-           '8' AS POSCode,
+           p.PeriodOfService,
            '' AS MeansTest,
-           '2' AS MaritalStatus,
-           Dim.WardLocation.WardLocationIEN,
+           CASE
+               WHEN p.MaritalStatus = 'DIVORCED' THEN '1'
+               WHEN p.MaritalStatus = 'MARRIED' THEN '2'
+               WHEN p.MaritalStatus = 'WIDOWED' THEN '4'
+               WHEN p.MaritalStatus = 'SEPARATED' THEN '5'
+               WHEN p.MaritalStatus = 'NEVER MARRIED' THEN '6'               
+               WHEN p.MaritalStatus = 'UNKNOWN' THEN '7'
+               ELSE ''
+           END AS MaritalStatus,
+           wl.WardLocationIEN,
            'TrSpec' AS TreatingSpecialty,
-           SStaff.SStaff.StaffIEN,
-           '' AS Placeholder1,
-           '' AS Placeholder2,
-           '' AS Placeholder3,
-           '' AS Placeholder4,
-           '' AS Placeholder5,
+           s.StaffIEN,
+           '12345678' AS MovementFileNum,
+           '' AS DRG,
+           '' AS Placeholder30,
+           '150001' AS Time,
+           '' AS PcProvider,
+           '' AS Race,
+           'PriWardProv' AS PrimaryWardProvider,
+           '' AS MPI,
+           '' AS Placeholder36,
+           '' AS Placeholder37,
+           '' AS Placeholder38,
+           '' AS Placeholder39,
            'N' AS EncounterSHAD,
            'N' AS PurpleHeart,
            'N' AS ObservationPt,
@@ -86,9 +101,9 @@ ADM_QUERY_01 = """
 
     INNER JOIN SPatient.SPatient AS p ON pt.PatientSID = p.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
-    INNER JOIN Dim.WardLocation ON pt.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
-    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = dim.Division.DivisionSID
-    INNER JOIN SStaff.SStaff ON pt.AttendingPhysicianStaffSID = SStaff.Staff.StaffSID
+    INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
+    INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
+    INNER JOIN SStaff.SStaff AS s ON pt.AttendingPhysicianStaffSID = s.StaffSID
     INNER JOIN Dim.VistASite ON pt.Sta3n = Dim.VistASite.Sta3n
 
     WHERE pa.OrdinalNumber = (
@@ -99,6 +114,7 @@ ADM_QUERY_01 = """
         and pt.Sta3n = ?
         and pt.PatientTransferDateTime >= ?
         and pt.PatientTransferDateTime <= ?
+        
     ORDER BY pt.PatientTransferDateTime;
 """
 
