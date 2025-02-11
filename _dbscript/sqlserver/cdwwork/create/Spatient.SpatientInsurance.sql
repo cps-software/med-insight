@@ -18,7 +18,8 @@ CREATE TABLE SPatient.SPatientInsurance
   Sta3n                     smallint      NOT NULL,
   InsuranceCompanySID       int           NULL,
   EmploymentStatus          varchar(50)   NULL,
-  RetirementDate            date          NULL
+  RetirementDate            date          NULL,
+  PolicyEffectiveDate       date          NULL
 );
 GO
 
