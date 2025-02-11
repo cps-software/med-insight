@@ -63,8 +63,8 @@ ADM_QUERY_01 = """
             END AS AddressEmpStatus,
 
             '1' AS HealthInsurance,
-            '39' AS StateCode,
-            '100' AS CountyCode,
+            s2.VAStateCode,
+            pa.County,   -- should this be a numeric coded value?
             pa.Zip4,
             pt.Sta3n,
             '10' AS EligCode,
@@ -142,6 +142,7 @@ ADM_QUERY_01 = """
 
     INNER JOIN SPatient.SPatient AS p ON pt.PatientSID = p.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
+    INNER JOIN Dim.State AS s2 ON s2.StateSID = pa.StateSID
     INNER JOIN Spatient.SpatientDisability AS pd ON pt.PatientSID = pd.PatientSID
     INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
     INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
