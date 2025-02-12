@@ -67,7 +67,7 @@ ADM_QUERY_01 = """
             pa.County,   -- should this be a numeric coded value?
             pa.Zip4,
             pt.Sta3n,
-            '10' AS EligCode,
+            p.EligibilityVACode,
             p.VeteranFlag,
             'N' AS Vietnam,
             pd.AgentOrangeExposureCode,
@@ -82,7 +82,7 @@ ADM_QUERY_01 = """
                 WHEN p.MaritalStatus = 'MARRIED' THEN '2'
                 WHEN p.MaritalStatus = 'WIDOWED' THEN '4'
                 WHEN p.MaritalStatus = 'SEPARATED' THEN '5'
-                WHEN p.MaritalStatus = 'NEVER MARRIED' THEN '6'               
+                WHEN p.MaritalStatus = 'NEVER MARRIED' THEN '6'
                 WHEN p.MaritalStatus = 'UNKNOWN' THEN '7'
                 ELSE ''
             END AS MaritalStatus,
@@ -120,10 +120,19 @@ ADM_QUERY_01 = """
             'N' AS ObservationPt,
             pd.AgentOrangeLocation,
             pd.POWLocation,
+            '' AS Placeholder62,
+            '' AS Placeholder63,
             
             -- skipping down a bit...
             pd.SWAsiaCode,
             pd.AgentOrangeExposureCode,  -- is this a duplicate?
+            '' AS Placeholder82,
+            s.NPI,
+            '' AS Placeholder84,
+            s.NPI,
+            'USA' AS CountryCode,    -- do this programatically
+            p.EligibilityStatus,
+
             pd.CampLejeuneFlag,
 
             -- skipping down a bit...
@@ -183,18 +192,4 @@ ADM_QUERY_01T = """
         and pt.PatientTransferDateTime >= ?
         and pt.PatientTransferDateTime <= ?
     ORDER BY pt.PatientTransferDateTime;
-"""
-
-ADM_QUERY_03 = """
-    SELECT SPatient.SPatient.PatientSID,
-           SPatient.SPatient.PatientIEN,
-           SPatient.SPatient.PatientName,
-           CONVERT(VARCHAR(10), SPatient.SPatient.PatientEnteredDateTime, 120) AS PatientEnteredDateTime,
-           SPatient.SPatient.Sta3n,
-           Dim.Sta3n.Sta3nName
-    FROM [CDWWork].[SPatient].[SPatient]
-    INNER JOIN [CDWWork].[Dim].[Sta3n]
-    ON SPatient.SPatient.Sta3n = Dim.Sta3n.Sta3n
-    WHERE PatientEnteredDateTime > '2025-01-20'
-    ORDER BY PatientSID;
 """
