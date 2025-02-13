@@ -11,25 +11,6 @@ BLUE = "\033[34m"
 GRAY = "\033[90m"
 RESET = "\033[0m"
 
-SELECT_ALL_Dim_Sta3n = """
-    SELECT *
-    FROM [CDWWork].[Dim].[Sta3n];
-"""
-
-SELECT_COLUMNS_Sta3n = """
-    SELECT Sta3n,
-           LEFT(Sta3nName, 50) AS Sta3nName,
-           LEFT(TimeZone, 25) AS TimeZone,
-           TRIM(LEFT(City, 30)) AS City
-    FROM [CDWWork].[Dim].[Sta3n];
-"""
-
-SELECT_ALL_Spatient_Spatient = """
-    SELECT * FROM Spatient_Spatient;
-"""
-
-SELECT_COLUMNS_Spatient_Spatient = "SELECT PatientSID, PatientIEN, Sta3n, PatientName FROM Spatient_Spatient;"
-
 ADM_SEQUENCE_NUMBER = '552ADM'
 ADM_YEAR_MONTH = '202501'
 EXTRACT_NUMBER = '0072025'
@@ -39,7 +20,10 @@ ADM_QUERY_01 = """
     -- This version of the query is based on the CDW Inpat.PatientTransfer table
     -- Make sure you have selected CDWWork as the active database
     -- There are several JOINS to other tables, mostly based on PatientSID
+    -- Before running, replace the three ? placeholder values in the WHERE clause
+    -- For example: '508', '2025-01-01', and '2025-01-03'
     --
+
     SELECT  d.DivisionIEN AS Division,
             p.PatientIEN,
             p.PatientSSN,       
@@ -167,29 +151,42 @@ ADM_QUERY_01 = """
         )
         and pt.Sta3n = ?
         and pt.PatientTransferDateTime >= ?
-        and pt.PatientTransferDateTime <= ?
+        and pt.PatientTransferDateTime < ?
         
     ORDER BY pt.PatientTransferDateTime;
 """
 
-ADM_QUERY_01T = """
+RAD_QUERY_01 = """
+    --
+    -- This version of the query is based on the CDW RadiologyNuclearMedicineReport table
+    -- Make sure you have selected CDWWork as the active database
+    -- There are several JOINS to other tables, mostly based on PatientSID
+    -- Before running, replace the three ? placeholder values in the WHERE clause
+    -- For example: '508', '2025-01-01', and '2025-01-03'
+    --
+
     SELECT
-        # dim.Division.DivisionIEN AS Division,
-        SPatient.SPatient.PatientIEN,
-        SPatient.SPatient.PatientSSN,       
-        LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
+        -- d.DivisionIEN AS Division,
+        '1' AS DivIEN,
+        p.PatientIEN,
+        p.PatientSSN,       
+        -- LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
         'I' AS InOutPatient,
-        REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
-        '' AS PrimaryCareTeam,
-        SPatient.SPatient.Gender,
-        REPLACE(CONVERT(VARCHAR(10), SPatient.SPatient.BirthDateTime, 120), '-', '') AS PatientBirthDate,
-        '' AS Religion
-    FROM Inpat.PatientTransfer AS pt
-    INNER JOIN SPatient.SPatient ON pt.PatientSID = SPatient.SPatient.PatientSID
-    INNER JOIN Dim.WardLocation ON pt.GainingWardLocationSID = Dim.WardLocation.WardLocationSID
-    INNER JOIN Dim.Division ON Dim.WardLocation.DivisionSID = dim.Division.DivisionSID
-    WHERE pt.Sta3n = ?
-        and pt.PatientTransferDateTime >= ?
-        and pt.PatientTransferDateTime <= ?
-    ORDER BY pt.PatientTransferDateTime;
+        -- REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS ProcedureDate,
+        '55555' AS CPTCode,
+        '99999' AS ProcedureCode,
+        '11111' AS ImagingLocation,
+        rnmr.RadiologyNuclearMedicineReportSID,
+        rnmr.Sta3n,
+        rnmr.ExamDateTime
+
+    FROM SStaff.RadiologyNuclearMedicineReport AS rnmr
+
+    INNER JOIN SPatient.SPatient AS p ON rnmr.PatientSID = p.PatientSID
+    
+    WHERE rnmr.Sta3n = ?
+        and rnmr.ExamDateTime >= ?
+        and rnmr.ExamDateTime <= ?
+
+    ORDER BY rnmr.ExamDateTime;
 """
