@@ -20,9 +20,9 @@ def main():
     Returns: None
     """
     print()
-    print(f"{YELLOW}           ┌──────────────────────────────────────┐    {RESET}")
-    print(f"{YELLOW}           │   CREATE DSS EXTRACT FROM CDW DATA   │    {RESET}")
-    print(f"{YELLOW}           └──────────────────────────────────────┘    {RESET}")
+    print(f"{YELLOW}           +---------------------------------------+    {RESET}")
+    print(f"{YELLOW}           |   CREATE DSS EXTRACT FROM CDW DATA    |   {RESET}")
+    print(f"{YELLOW}           +---------------------------------------+    {RESET}")
     print()
     station    = input(f"{YELLOW}     Please enter a VistA Station Number: {RESET}")
     extract    = input(f"{YELLOW}   Please enter an extract name (or ALL): {RESET}").upper()

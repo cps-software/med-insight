@@ -26,7 +26,8 @@ def fetch_adm_records(station, start_date, end_date):
         records = cursor.fetchall()
 
         if records:
-            print("Records found:\n")
+            print(f"{len(records)} Records found\n")
+            print(f"{GREEN}{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}{RESET}\n")
             # Print each row using caret as delimiter
             for row in records:
                 print(GREEN + "^".join(str(value) for value in row), end="~\n")
