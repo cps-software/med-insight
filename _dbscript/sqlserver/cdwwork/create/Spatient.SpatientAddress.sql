@@ -27,6 +27,8 @@ CREATE TABLE SPatient.SPatientAddress
   Zip                       varchar(50)   NULL,
   Zip4                      varchar(50)   NULL,
   PostalCode                varchar(50)   NULL,
+  Country                   varchar(100)  NULL,
+  CountrySID                int           NULL,
   EmploymentStatus          varchar(50)   NULL                  
 );
 GO

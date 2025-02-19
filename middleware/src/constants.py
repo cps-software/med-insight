@@ -93,7 +93,10 @@ ADM_QUERY_01 = """
             pd.SHADFlag,
             '' AS Placeholder43,
             '' AS Placeholder44,
-            'TBD' AS EnrollmentLocation,
+
+            -- Using p.Sta3n for now (determine if enrollment file needed)
+            p.Sta3n AS EnrollmentLocation,
+
             '' AS Placeholder46,
             '' AS Placeholder47,
             '' AS Placeholder48,
@@ -110,13 +113,14 @@ ADM_QUERY_01 = """
             '' AS Placeholder63,
             
             -- skipping down a bit...
+            '' AS Placeholder70,
             pd.SWAsiaCode,
             pd.AgentOrangeExposureCode,  -- is this a duplicate?
             '' AS Placeholder82,
             s.NPI,
             '' AS Placeholder84,
             s.NPI,
-            'USA' AS CountryCode,    -- do this programatically
+            c.CountryCode,
             p.EligibilityStatus,
 
             pd.CampLejeuneFlag,
@@ -124,20 +128,14 @@ ADM_QUERY_01 = """
             -- skipping down a bit...
             '' AS PlaceholderCerner,
             p.PatientICN,
-            p.SelfIdentifiedGender,
-
-            -- a few additional debug type fields
-            'RET' AS PtCategory,
-            pt.InpatientSID,
-            pt.OrdinalNumber,
-            pt.PatientSID,
-            p.PatientName
+            p.SelfIdentifiedGender
 
     FROM Inpat.PatientTransfer AS pt
 
     INNER JOIN SPatient.SPatient AS p ON pt.PatientSID = p.PatientSID
     INNER JOIN SPatient.SPatientAddress AS pa ON pt.PatientSID = pa.PatientSID
     INNER JOIN Dim.State AS s2 ON s2.StateSID = pa.StateSID
+    INNER JOIN Dim.Country AS c ON pa.CountrySID = c.CountrySID    
     INNER JOIN Spatient.SpatientDisability AS pd ON pt.PatientSID = pd.PatientSID
     INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
     INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
