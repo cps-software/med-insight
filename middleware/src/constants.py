@@ -24,7 +24,7 @@ ADM_QUERY_01 = """
     -- For example: '508', '2025-01-01', and '2025-01-03'
     --
 
-    SELECT  d.DivisionIEN AS Division,
+    SELECT  d.DivisionIEN,
             p.PatientIEN,
             p.PatientSSN,       
             LEFT(p.PatientLastName, 4) AS LName4,
@@ -50,14 +50,13 @@ ADM_QUERY_01 = """
             s2.VAStateCode,
             pa.County,   -- should this be a numeric coded value?
             pa.Zip4,
-            pt.Sta3n,
             p.EligibilityVACode,
             p.VeteranFlag,
             'N' AS Vietnam,
             pd.AgentOrangeExposureCode,
             pd.IonizingRadiationCode,
             pd.POWStatusCode,
-            p.PeriodOfService,
+            pos.PeriodOfServiceCode,
             '' AS MeansTest,
 
             -- Get and map Patient Marital Status
@@ -72,12 +71,15 @@ ADM_QUERY_01 = """
             END AS MaritalStatus,
 
             wl.WardLocationIEN,
-            'TrSpec' AS TreatingSpecialty,
+            'TreatSpec' AS TreatingSpecialty,
             s.StaffIEN,
             '12345678' AS MovementFileNum,
-            '' AS DRG,
+            '' AS PlaceholderDRG,
             '' AS Placeholder30,
-            '150001' AS Time,
+
+            -- Get the time component of the PT DateTime field
+            REPLACE(CONVERT(VARCHAR(8), pt.PatientTransferDateTime, 108), ':', '') AS PatXferTime,
+
             '' AS PcProvider,
             '' AS Race,
             'PriWardProv' AS PrimaryWardProvider,
@@ -139,6 +141,7 @@ ADM_QUERY_01 = """
     INNER JOIN Spatient.SpatientDisability AS pd ON pt.PatientSID = pd.PatientSID
     INNER JOIN Dim.WardLocation AS wl ON pt.GainingWardLocationSID = wl.WardLocationSID
     INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
+    INNER JOIN Dim.PeriodOfService AS pos ON p.PeriodOfServiceSID = pos.PeriodOfServiceSID
     INNER JOIN SStaff.SStaff AS s ON pt.AttendingPhysicianStaffSID = s.StaffSID
     INNER JOIN Dim.VistASite ON pt.Sta3n = Dim.VistASite.Sta3n
 

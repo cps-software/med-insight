@@ -32,12 +32,6 @@ def fetch_adm_records(station, start_date, end_date):
             for row in records:
                 print(GREEN + "^".join(str(value) for value in row), end="~\n")
                 print(RESET)
-
-            # print("Records found:\n")
-            # print(f"{GREEN}{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}{RESET}\n")
-            # for row in records:
-            #     print(f"{GREEN}{row}{RESET}")
-            #     print()
         else:
             print("No records found from this select statement.")
 
