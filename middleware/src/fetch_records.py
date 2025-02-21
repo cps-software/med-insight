@@ -19,8 +19,32 @@ def fetch_adm_records(station, start_date, end_date):
         # create a cursor
         cursor = connection.cursor()
 
-        # execute query
+        # execute query 01
+        print("Executing query to create global temp table, ##AdmPatientCohort")
         cursor.execute(ADM_QUERY_01, station, start_date, end_date)
+
+        # execute query 02
+        print("Executing query to display all rows in ##AdmPatientCohort (unsorted)")
+        cursor.execute(ADM_QUERY_02)
+
+        # fetch all records (into list)
+        records = cursor.fetchall()
+
+        if records:
+            print(f"{len(records)} Records found\n")
+            # print(f"{GREEN}{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}{RESET}\n")
+            # Print each row using caret as delimiter
+            for row in records:
+                print(GREEN + "^".join(str(value) for value in row), end="~\n")
+                print(RESET, end="")
+        else:
+            print("No records found from this select statement.")
+
+        print()
+
+        # execute query 03
+        print("Executing query to create ADM extract dataset (sorted by date)")
+        cursor.execute(ADM_QUERY_03)
 
         # fetch all records (into list)
         records = cursor.fetchall()

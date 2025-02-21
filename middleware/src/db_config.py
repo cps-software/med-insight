@@ -8,17 +8,12 @@ import os                          # import entire module
 load_dotenv()
 
 def create_connection():
-    """Creates and returns a connection to the MySQL database."""
-    
-    # Print environment variables for debugging
-    # print("DB_SERVER:", os.getenv('DB_SERVER'))
-    # print("DB_NAME:", os.getenv('DB_NAME'))
-    # print("DB_USER:", os.getenv('DB_USER'))
-    # print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
-    # print("TRUST_CONNECTION:", os.getenv('TRUST_CONNECTION'))
-    # print("TRUST_CERT:", os.getenv('TRUST_CERT'))
-    # print()
-
+    """
+    Creates and returns a connection to designated SQL Server database. The
+    two 'Trust' related string literal parameters are specific to either macOS
+    or Windows, so depending on your envirionment, one will be commented out.
+    Yes, this is a cludge, but hey, I'm just one person with a lot of code to write!
+    """
     try:
         connection_string = (
             f"DRIVER={{ODBC Driver 18 for SQL Server}};"
@@ -37,7 +32,7 @@ def create_connection():
         return None
 
 def close_connection(connection):
-    """Closes the given database connection."""
+    """Close the given database connection."""
     try:
         connection.close()
         print("SQL Server connection is closed")
