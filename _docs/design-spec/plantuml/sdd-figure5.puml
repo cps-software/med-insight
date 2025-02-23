@@ -1,0 +1,24 @@
+@startuml
+
+' ETL Workflow Sequence Diagram
+
+participant   "Dashboard"      as DSH
+participant   "ETL Engine"     as ETL
+participant   "CDW Database"   as CDW
+participant   "DSS Database"   as DDB
+participant   "File System"    as FSY
+participant   "DSS Mainframe"  as DMF
+
+DSH ->  DSH : select site(s),\nselect extract(s),\nselect date range,\nselect "audit" or "final"
+DSH ->  ETL : start ETL process
+ETL ->  DDB : get raw extract data
+DDB --> ETL : return raw extract data
+ETL ->  ETL : transform records
+ETL ->  DDB : save transformed records
+ETL ->  FSY : create extract file(s)
+ETL ->  DMF : send extract files(s)
+DMF --> ETL : return "success" or "fail" message
+ETL ->  DDB : save audit/log record
+ETL ->  DSH : send status message
+
+@enduml

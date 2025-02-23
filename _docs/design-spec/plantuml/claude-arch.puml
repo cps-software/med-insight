@@ -1,0 +1,53 @@
+@startuml
+!define RECTANGLE class
+
+skinparam rectangle {
+    BackgroundColor<<Source>> LightBlue
+    BackgroundColor<<Target>> LightGreen
+    BackgroundColor<<Component>> White
+    BorderColor Black
+}
+
+rectangle "VA Corporate Data Warehouse" as CDW <<Source>>
+
+package "Solution 1: SSIS-Based ETL" {
+    rectangle "SSIS ETL Engine" as SSIS <<Component>>
+    database "SQL Server\nData Mart" as SSDB
+}
+
+package "Solution 2: Python-Based ETL" {
+    rectangle "Python ETL Scripts" as PY <<Component>>
+    database "SQL Server\nData Mart" as PYDB
+}
+
+package "Common Components" {
+    rectangle "User Interface" as UI <<Component>>
+    rectangle "Monitoring & Logging" as MON <<Component>>
+    rectangle "SFTP Transfer Module" as SFTP <<Component>>
+}
+
+rectangle "AITC Target System" as AITC <<Target>>
+
+' Source connections
+CDW --> SSIS : Query Data
+CDW --> PY : Query Data
+
+' UI connections
+UI --> SSIS : Trigger Extract
+UI --> PY : Trigger Extract
+
+' Data flow
+SSIS --> SSDB : Extract & Transform
+PY --> PYDB : Extract & Transform
+
+' File generation and transfer
+SSDB --> SFTP : Generate Extract Files
+PYDB --> SFTP : Generate Extract Files
+SFTP --> AITC : Secure Transfer
+
+' Logging
+SSIS --> MON : Log Events
+PY --> MON : Log Events
+SFTP --> MON : Log Transfer Status
+
+@enduml

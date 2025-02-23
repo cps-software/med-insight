@@ -1,0 +1,23 @@
+@startuml
+
+' ETL Workflow Sequence Diagram
+
+participant   "CRON Job"       as CRN
+participant   "ETL Engine"     as ETL
+participant   "CDW Database"   as CDW
+participant   "DSS Database"   as DDB
+participant   "File System"    as FSY
+participant   "DSS Mainframe"  as DMF
+
+CRN ->  ETL : start ETL process\n(incremental criteria)
+ETL ->  CDW : get patient cohort data
+CDW ->  CDW : save as temp table
+ETL ->  CDW : get supporting data
+CDW ->  CDW : save as temp table
+ETL ->  CDW : get extracted records
+CDW --> ETL : return extracted records
+ETL ->  DDB : load extracted records
+ETL ->  DDB : save audit/log record
+ETL ->  CRN : send status message
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+
+' title WHIMS Select Patient Flow
+
+actor         "WHIMS User"        as A1
+participant   "WHIMS App"         as P1
+participant   "WHIMS API"         as P2
+participant   "WHIMS Database"    as P3
+participant   "CDS Platform"      as P4
+participant   "VA MPI"            as P5
+participant   "CCOW Vault"        as P6
+participant   "CPRS"              as P7
+
+A1 ->  P1 : Select dashboard view
+P1 ->  P2 : Get dashboard data
+P2 ->  P3 : Get dashboard data
+P3 --> P2 : Dashboard data
+P2 --> P1 : Dashboard data
+P1 ->  P1 : Display dashboard
+A1 ->  P1 : Select a dashboard tile
+P1 ->  P1 : Display tile view 
+A1 ->  P1 : View list of patients
+A1 ->  P1 : Select a patient
+P1 ->  P2 : Get patient data
+P2 ->  P3 : Get patient data
+P3 --> P2 : Patient data
+P2 --> P1 : Patient data
+P2 ->  P4 : Request clinical context change (MPI ICN)
+P4 ->  P5 : Interface with MPI
+P4 ->  P6 : Set new clinical context
+P6 ->  P7 : New clinical context
+P1 ->  P1 : Display new view\nwith patient data
+A1 ->  P1 : Continue work
+
+@enduml

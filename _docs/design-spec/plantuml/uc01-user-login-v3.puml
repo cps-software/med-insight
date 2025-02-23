@@ -1,0 +1,60 @@
+@startuml
+
+' Launch WHIMS directly from browswer
+
+actor         "WHIMS User"        as A1
+participant   "Web Browser"       as P1
+participant   "WHIMS App"         as P2
+participant   "VA IAM SSOi"       as P3
+participant   "CDS Platform"      as P4
+participant   "VistA API"         as P5
+participant   "VistA"             as P6
+participant   "CCOW Vault"        as P7
+participant   "WHIMS App"         as P8
+
+A1 -> P1 : Enter WHIMS URL or\nSelect Bookmark
+P1 -> P2 : https://dev.cds.med.va.gov/whims-ui/
+note right
+  Nginx web server
+  listening on port 8080
+end note
+P2 -> P1 : https:/ssologon.int.iam.va.gov/\ncentrallogin/IwaDefault.aspx
+note right
+  HTTP 302 Found
+  (redirect)
+end note
+P1 -> P3 : Follow redirect
+P3 ->  P1 : Authentication request
+note right
+  What's going on here?
+end note
+P1 --> P3 : Windows authentication credentials
+P3 ->  P4 : Establish IAM session cookie
+note right
+  IAM session cookie allows launch of SMART on FHIR apps
+end note
+P4 --> P3 : IAM session cookie
+P3 ->  P3 : Load user preferences
+P3 ->  P5 : GET provider keys (IAM session cookie)
+P5 ->  P4 : Get STS SAML token\n(User Indirect mode)
+P4 --> P5 : STS SAML token
+P5 ->  P6 : Establish connection\n(STS SAML token)
+P6 --> P5 : Connection
+P5 ->  P6 : GET provider keys RPC
+P6 --> P5 : Provider keys
+P5 --> P3 : Provider keys
+P3 ->  P3 : Customize content per user role (VistA keys)
+P3 ->  P7 : GET Clinical context
+P7 --> P3 : Clinical context (patient_id)
+P3 ->  P3 : Display CDS Console
+A1 ->  P3 : Select WHIMS App to lauch
+P3 ->  P8 : Open WHIMS app within browser iframe (url_string_for_whims, launch_id)
+note right
+  launch_id: JSON string w/ patient context
+  (patient_id, station_number, duz)
+end note
+P8 ->  P8 : Customize content per user role (user_id)
+P8 ->  P8 : Present WHIMS landing page
+A1 ->  P8 : Interact with WHIMS app
+
+@enduml
