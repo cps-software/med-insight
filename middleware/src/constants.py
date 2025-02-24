@@ -17,11 +17,10 @@ EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_00 = """
     --
-    -- This version of the query is based on the CDW Inpat.PatientTransfer table
+    -- This query is based on the CDW Inpat.PatientTransfer table
     -- Make sure you have selected CDWWork as the active database
-    -- There are several JOINS to other tables, mostly based on PatientSID
     -- Before running, replace the three ? placeholder values in the WHERE clause
-    -- For example: '508', '2025-01-01', and '2025-01-03'
+    -- For example: 508, '2025-01-01', and '2025-01-03'
     --
 
     SELECT  d.DivisionIEN,
@@ -160,8 +159,8 @@ ADM_QUERY_00 = """
 ADM_QUERY_01 = """
     --
     -- Get Patient Cohort and write selected data set to a temporary table
-    -- Before running, replace the three ? placeholder values in the WHERE clause
-    -- For example: '508', '2025-01-01', and '2025-01-03'
+    -- Before running, replace the ? placeholder values in the WHERE clause
+    -- For example: 508, '2025-01-01', and '2025-01-03'
     --
     SELECT
         pt.PatientSID,
@@ -177,39 +176,36 @@ ADM_QUERY_01 = """
 """
 
 ADM_QUERY_02 = """
+    --
     -- Check results from prior query
+    --
     SELECT *
     FROM ##AdmPatientCohort;
 """
 
 ADM_QUERY_03 = """
     --
-    -- Join ##AdmPatientCohort with several additional tables to produce ADM
-    -- extract result set. Store these results into an additional temporary table
-    -- (haven't created temp table yet, will do that next)
+    -- Join ##AdmPatientCohort with additional tables to get all ADM data elements
+    -- Store result into an additional temporary table
+    -- TO-DO: remove transformations from this transaction (do this later)
     --
     SELECT
         d.DivisionIEN,
         p.PatientIEN,
         p.PatientSSN,       
-        LEFT(p.PatientLastName, 4) AS LName4,
+        p.PatientLastName,
         'I' AS InOutPatient,
-        REPLACE(CONVERT(VARCHAR(10), apc.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
+        apc.PatientTransferDateTime,
+
+        -- move transformation logic to later query
+        -- REPLACE(CONVERT(VARCHAR(10), apc.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
+
         '' AS PrimaryCareTeam,
         p.Gender,
-        REPLACE(CONVERT(VARCHAR(10), p.BirthDateTime, 120), '-', '') AS PatientBirthDate,
+        p.BirthDateTime,
         '' AS Religion,
 
-        -- Employment Status Mapping
-        CASE
-            WHEN pa.EmploymentStatus = 'EMPLOYED FULL TIME' THEN '1'
-            WHEN pa.EmploymentStatus = 'EMPLOYED PART TIME' THEN '2'
-            WHEN pa.EmploymentStatus = 'NOT EMPLOYED' THEN '3'
-            WHEN pa.EmploymentStatus = 'SELF EMPLOYED' THEN '4'
-            WHEN pa.EmploymentStatus = 'RETIRED' THEN '5'
-            WHEN pa.EmploymentStatus = 'ACTIVE MILITARY DUTY' THEN '6'
-            ELSE '9'
-        END AS AddressEmpStatus,
+        pa.EmploymentStatus,
 
         '1' AS HealthInsurance,
         s2.VAStateCode,
@@ -224,16 +220,7 @@ ADM_QUERY_03 = """
         pos.PeriodOfServiceCode,
         '' AS MeansTest,
 
-        -- Marital Status Mapping
-        CASE
-            WHEN p.MaritalStatus = 'DIVORCED' THEN '1'
-            WHEN p.MaritalStatus = 'MARRIED' THEN '2'
-            WHEN p.MaritalStatus = 'WIDOWED' THEN '4'
-            WHEN p.MaritalStatus = 'SEPARATED' THEN '5'
-            WHEN p.MaritalStatus = 'NEVER MARRIED' THEN '6'
-            WHEN p.MaritalStatus = 'UNKNOWN' THEN '7'
-            ELSE ''
-        END AS MaritalStatus,
+       p.MaritalStatus,
 
         wl.WardLocationIEN,
         'TreatSpec' AS TreatingSpecialty,
@@ -242,8 +229,8 @@ ADM_QUERY_03 = """
         '' AS PlaceholderDRG,
         '' AS Placeholder30,
 
-        -- Extracting Time Component
-        REPLACE(CONVERT(VARCHAR(8), apc.PatientTransferDateTime, 108), ':', '') AS PatXferTime,
+        -- Extracting Time Component (move this logic to later query)
+        -- REPLACE(CONVERT(VARCHAR(8), apc.PatientTransferDateTime, 108), ':', '') AS PatXferTime,
 
         '' AS PcProvider,
         '' AS Race,
@@ -280,11 +267,16 @@ ADM_QUERY_03 = """
         -- skipping down a bit...
         '' AS Placeholder70,
         pd.SWAsiaCode,
-        pd.AgentOrangeExposureCode,  -- is this a duplicate?
+
+        -- duplicate below, so commenting out
+        -- pd.AgentOrangeExposureCode,
+
         '' AS Placeholder82,
         s.NPI,
         '' AS Placeholder84,
-        s.NPI,
+
+        -- duplicate below, so commenting out
+        -- s.NPI,
         c.CountryCode,
         p.EligibilityStatus,
 
@@ -293,7 +285,9 @@ ADM_QUERY_03 = """
         -- skipping down a bit...
         '' AS PlaceholderCerner,
         p.PatientICN,
-        p.SelfIdentifiedGender
+        p.SelfIdentifiedGender AS SIGI
+        
+    INTO ##AdmPatientExtract
 
     FROM ##AdmPatientCohort AS apc
 
@@ -314,13 +308,138 @@ ADM_QUERY_03 = """
             SELECT MAX(pa2.OrdinalNumber)
             FROM SPatient.SPatientAddress AS pa2
             WHERE pa2.PatientSID = apc.PatientSID 
-        )
-    
-    ORDER by apc.PatientTransferDateTime;
+        );
 """
 
+ADM_QUERY_04 = """
+    --
+    -- Check results from prior query (unsorted)
+    --
+    SELECT *
+    FROM ##AdmPatientExtract;
+"""
 
+ADM_QUERY_05 = """
+    --
+    -- Create final extract format (transform and sort)
+    -- TO-DO: move all transformation and sorting logic (from query 3) here
+    --
+    SELECT
+        DivisionIEN,
+        PatientIEN,
+        PatientSSN,       
+        LEFT(PatientLastName, 4) AS LName4,
+        InOutPatient,
+        REPLACE(CONVERT(VARCHAR(10), PatientTransferDateTime, 120), '-', '') AS PatXferDate,
 
+        PrimaryCareTeam,
+        Gender,
+        REPLACE(CONVERT(VARCHAR(10), BirthDateTime, 120), '-', '') AS PatientBirthDate,
+        Religion,
+
+        -- Employment Status Mapping
+        CASE
+            WHEN EmploymentStatus = 'EMPLOYED FULL TIME' THEN '1'
+            WHEN EmploymentStatus = 'EMPLOYED PART TIME' THEN '2'
+            WHEN EmploymentStatus = 'NOT EMPLOYED' THEN '3'
+            WHEN EmploymentStatus = 'SELF EMPLOYED' THEN '4'
+            WHEN EmploymentStatus = 'RETIRED' THEN '5'
+            WHEN EmploymentStatus = 'ACTIVE MILITARY DUTY' THEN '6'
+            ELSE '9'
+        END AS AddressEmpStatus,
+
+        HealthInsurance,
+        VAStateCode,
+        County,   -- should this be a numeric coded value?
+        Zip4,
+        EligibilityVACode,
+        VeteranFlag,
+        Vietnam,
+        AgentOrangeExposureCode,
+        IonizingRadiationCode,
+        POWStatusCode,
+        PeriodOfServiceCode,
+        MeansTest,
+
+        -- Marital Status Mapping
+        CASE
+            WHEN MaritalStatus = 'DIVORCED' THEN '1'
+            WHEN MaritalStatus = 'MARRIED' THEN '2'
+            WHEN MaritalStatus = 'WIDOWED' THEN '4'
+            WHEN MaritalStatus = 'SEPARATED' THEN '5'
+            WHEN MaritalStatus = 'NEVER MARRIED' THEN '6'
+            WHEN MaritalStatus = 'UNKNOWN' THEN '7'
+            ELSE ''
+        END AS MaritalStatus,
+
+        WardLocationIEN,
+        TreatingSpecialty,
+        StaffIEN,
+        MovementFileNum,
+        PlaceholderDRG,
+        Placeholder30,
+
+        -- Extracting Time Component
+        REPLACE(CONVERT(VARCHAR(8), PatientTransferDateTime, 108), ':', '') AS PatXferTime,
+
+        PcProvider,
+        Race,
+        PrimaryWardProvider,
+        MPI,
+        Placeholder36,
+        Placeholder37,
+        Placeholder38,
+        Placeholder39,
+        AdmissionEligibility,
+        MSTStatus,
+        SHADFlag,
+        Placeholder43,
+        Placeholder44,
+
+        -- Using p.Sta3n for now (determine if enrollment file needed)
+        EnrollmentLocation,
+
+        Placeholder46,
+        Placeholder47,
+        Placeholder48,
+        Placeholder49,
+        Dom,
+        EnrollmentCategory,
+        EnrollmentStatus,
+        EncounterSHAD,
+        PurpleHeart,
+        ObservationPt,
+        AgentOrangeLocation,
+        POWLocation,
+        Placeholder62,
+        Placeholder63,
+            
+        -- skipping down a bit...
+        Placeholder70,
+        SWAsiaCode,
+
+        -- duplicate below, so commenting out
+        -- pd.AgentOrangeExposureCode,
+
+        Placeholder82,
+        NPI,
+        Placeholder84,
+
+        -- duplicate below, so commenting out
+        -- s.NPI,
+        CountryCode,
+        EligibilityStatus,
+
+        CampLejeuneFlag,
+
+        -- skipping down a bit...
+        PlaceholderCerner,
+        PatientICN,
+        SIGI
+        
+    FROM ##AdmPatientExtract
+    ORDER BY PatXferDate;
+"""
 
 RAD_QUERY_01 = """
     --
