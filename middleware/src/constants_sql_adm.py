@@ -1,19 +1,5 @@
-# constants.py
+# constants_sql_adm.py
 """Constants for SLQ statements"""
-
-import os                          # import entire module
-
-# ANSI color codes
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-BLUE = "\033[34m"
-GRAY = "\033[90m"
-RESET = "\033[0m"
-
-ADM_SEQUENCE_NUMBER = '552ADM'
-ADM_YEAR_MONTH = '202501'
-EXTRACT_NUMBER = '0072025'
 
 ADM_QUERY_00 = """
     --
@@ -167,7 +153,8 @@ ADM_QUERY_01 = """
         pt.PatientTransferDateTime,
         pt.GainingWardLocationSID,
         pt.Sta3n,
-        pt.AttendingPhysicianStaffSID
+        pt.AttendingPhysicianStaffSID,
+        pt.InpatientSID
     INTO ##AdmPatientCohort
     FROM Inpat.PatientTransfer AS pt
     WHERE pt.Sta3n = ?
@@ -196,17 +183,11 @@ ADM_QUERY_03 = """
         p.PatientLastName,
         'I' AS InOutPatient,
         apc.PatientTransferDateTime,
-
-        -- move transformation logic to later query
-        -- REPLACE(CONVERT(VARCHAR(10), apc.PatientTransferDateTime, 120), '-', '') AS PatXferDate,
-
         '' AS PrimaryCareTeam,
         p.Gender,
         p.BirthDateTime,
         '' AS Religion,
-
         pa.EmploymentStatus,
-
         '1' AS HealthInsurance,
         s2.VAStateCode,
         pa.County,   -- should this be a numeric coded value?
@@ -219,9 +200,7 @@ ADM_QUERY_03 = """
         pd.POWStatusCode,
         pos.PeriodOfServiceCode,
         '' AS MeansTest,
-
-       p.MaritalStatus,
-
+        p.MaritalStatus,
         wl.WardLocationIEN,
         'TreatSpec' AS TreatingSpecialty,
         s.StaffIEN,
@@ -245,10 +224,7 @@ ADM_QUERY_03 = """
         pd.SHADFlag,
         '' AS Placeholder43,
         '' AS Placeholder44,
-
-        -- Using p.Sta3n for now (determine if enrollment file needed)
-        p.Sta3n AS EnrollmentLocation,
-
+        p.Sta3n AS EnrollmentLocation,  -- Using p.Sta3n for now (enrollment file needed?)
         '' AS Placeholder46,
         '' AS Placeholder47,
         '' AS Placeholder48,
@@ -260,6 +236,7 @@ ADM_QUERY_03 = """
         'N' AS PurpleHeart,
         'N' AS ObservationPt,
         pd.AgentOrangeLocation,
+
         pd.POWLocation,
         '' AS Placeholder62,
         '' AS Placeholder63,
@@ -277,9 +254,9 @@ ADM_QUERY_03 = """
 
         -- duplicate below, so commenting out
         -- s.NPI,
+
         c.CountryCode,
         p.EligibilityStatus,
-
         pd.CampLejeuneFlag,
 
         -- skipping down a bit...
@@ -331,7 +308,6 @@ ADM_QUERY_05 = """
         LEFT(PatientLastName, 4) AS LName4,
         InOutPatient,
         REPLACE(CONVERT(VARCHAR(10), PatientTransferDateTime, 120), '-', '') AS PatXferDate,
-
         PrimaryCareTeam,
         Gender,
         REPLACE(CONVERT(VARCHAR(10), BirthDateTime, 120), '-', '') AS PatientBirthDate,
@@ -395,10 +371,7 @@ ADM_QUERY_05 = """
         SHADFlag,
         Placeholder43,
         Placeholder44,
-
-        -- Using p.Sta3n for now (determine if enrollment file needed)
-        EnrollmentLocation,
-
+        EnrollmentLocation,  -- Using p.Sta3n for now (enrollment file needed?)
         Placeholder46,
         Placeholder47,
         Placeholder48,
@@ -427,9 +400,9 @@ ADM_QUERY_05 = """
 
         -- duplicate below, so commenting out
         -- s.NPI,
+
         CountryCode,
         EligibilityStatus,
-
         CampLejeuneFlag,
 
         -- skipping down a bit...
@@ -439,39 +412,4 @@ ADM_QUERY_05 = """
         
     FROM ##AdmPatientExtract
     ORDER BY PatXferDate;
-"""
-
-RAD_QUERY_01 = """
-    --
-    -- This version of the query is based on the CDW RadiologyNuclearMedicineReport table
-    -- Make sure you have selected CDWWork as the active database
-    -- There are several JOINS to other tables, mostly based on PatientSID
-    -- Before running, replace the three ? placeholder values in the WHERE clause
-    -- For example: '508', '2025-01-01', and '2025-01-03'
-    --
-
-    SELECT
-        -- d.DivisionIEN AS Division,
-        '1' AS DivIEN,
-        p.PatientIEN,
-        p.PatientSSN,       
-        -- LEFT(SPatient.SPatient.PatientLastName, 4) AS LName4,
-        'I' AS InOutPatient,
-        -- REPLACE(CONVERT(VARCHAR(10), pt.PatientTransferDateTime, 120), '-', '') AS ProcedureDate,
-        '55555' AS CPTCode,
-        '99999' AS ProcedureCode,
-        '11111' AS ImagingLocation,
-        rnmr.RadiologyNuclearMedicineReportSID,
-        rnmr.Sta3n,
-        rnmr.ExamDateTime
-
-    FROM SStaff.RadiologyNuclearMedicineReport AS rnmr
-
-    INNER JOIN SPatient.SPatient AS p ON rnmr.PatientSID = p.PatientSID
-    
-    WHERE rnmr.Sta3n = ?
-        and rnmr.ExamDateTime >= ?
-        and rnmr.ExamDateTime <= ?
-
-    ORDER BY rnmr.ExamDateTime;
 """

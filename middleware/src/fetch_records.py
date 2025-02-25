@@ -2,7 +2,8 @@
 """Custom queries to get DSS extract data for each extract type"""
 
 # import required dependencies
-from src.constants import *
+from src.constants_general import *
+from src.constants_sql_adm import *
 from src.db_config import create_connection, close_connection
 import pyodbc
 
@@ -63,6 +64,10 @@ def fetch_adm_records(station, start_date, end_date):
 
         print()
 
+        # To-Do: add step to first load the raw ADM record set to a DSS local database
+        # Then, we will work with this database to perform the transformation, etc. steps.
+        # For now, performing transformation from CDW temp table and displaying results.
+
         # execute query 05
         print("Executing query to select all rows from global temp table (transformed & sorted)")
         cursor.execute(ADM_QUERY_05)
@@ -72,6 +77,7 @@ def fetch_adm_records(station, start_date, end_date):
 
         if records:
             print(f"{len(records)} Records found\n")
+            # Print current VistA-based extract header
             print(f"{GREEN}{ADM_SEQUENCE_NUMBER}{ADM_YEAR_MONTH}{EXTRACT_NUMBER}{RESET}\n")
             # Print each row with pipe delimiter
             for row in records:

@@ -3,20 +3,17 @@
 
 # import required dependencies
 from src.extract_adm import create_and_write_file
-from src.constants import *
+from src.constants_general import *
+from src.constants_sql_adm import *
 from src.fetch_records import *
 import os
 
 def main():
     """
-    Prompt user for DSS extract processing parameters:
-     - VistA Station
-     - Extract (a specific extract or "all")
-     - Start and end dates for extract date range
-
-    Call a frontend handler that in turn calls other functions based on input parameters.
-    After the above processing completes, write a summary of results to the screen.
-
+    Prompt user for DSS extract processing parameters
+    Run fetch function for selected extract tyoe
+    Create extract(s)
+    Update database with logging info
     Returns: None
     """
     print()
