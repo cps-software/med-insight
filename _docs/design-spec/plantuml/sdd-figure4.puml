@@ -1,22 +1,21 @@
 @startuml
 
 ' ETL Workflow Sequence Diagram
+' Incremental pull of data from CDW database to DSS database
 
-participant   "CRON Job"       as CRN
-participant   "ETL Engine"     as ETL
+participant   "DSS CRON Job"   as CRN #lightblue
+participant   "ETL Engine"     as ETL #lightblue
 participant   "CDW Database"   as CDW
-participant   "DSS Database"   as DDB
-participant   "File System"    as FSY
-participant   "DSS Mainframe"  as DMF
+participant   "DSS Database"   as DDB #lightblue
 
-CRN ->  ETL : start ETL process\n(incremental criteria)
+CRN ->  ETL : start ETL process\n(incremental data criteria)
 ETL ->  CDW : get patient cohort data
 CDW ->  CDW : save as temp table
 ETL ->  CDW : get supporting data
 CDW ->  CDW : save as temp table
 ETL ->  CDW : get extracted records
 CDW --> ETL : return extracted records
-ETL ->  DDB : load extracted records
+ETL ->  DDB : save extracted records (original format)
 ETL ->  DDB : save audit/log record
 ETL ->  CRN : send status message
 
