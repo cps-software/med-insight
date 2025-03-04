@@ -4,6 +4,7 @@
 # import required dependencies
 from src.constants_general import *
 from src.constants_sql_adm import *
+from src.constants_sql_rad import *
 from src.db_config import create_connection, close_connection
 import pyodbc
 
@@ -107,7 +108,8 @@ def fetch_rad_records(station, start_date, end_date):
         # create a cursor
         cursor = connection.cursor()
 
-        # execute query
+        # execute query 01
+        print("Executing query to select Patient Cohort into global temp table")
         cursor.execute(RAD_QUERY_01, station, start_date, end_date)
 
         # fetch all records (into list)

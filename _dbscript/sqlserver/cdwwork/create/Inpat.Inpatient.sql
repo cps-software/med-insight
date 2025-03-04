@@ -39,16 +39,12 @@ CREATE TABLE Inpat.Inpatient
   GovernmentEmployeeFlag                  CHAR(1)         NULL,
   SensitiveFlag                           CHAR(1)         NULL,
   Age                                     NUMERIC(9)      NULL,
-  BirthDateTime                           DATETIME        NULL,
-  BirthVistaErrorDate                     VARCHAR(50)     NULL,
-  BirthDateTimeTransformSID               BIGINT          NULL,
-  MedicaidInquireDateTimeTransformSID     BIGINT          NULL,
-  VeteranTransportationProgramFlag        CHAR(1)         NULL
+  BirthDateTime                           DATETIME        NULL
 );
 GO
 
 -- Create indexes for the SPatient.Patient table
 CREATE INDEX IX_InpatientSID ON Inpat.Inpatient (InpatientSID);
 CREATE INDEX IX_PatientSID ON Inpat.Inpatient (PatientSID);
-CREATE INDEX IX_Sta3n ON SPatient.SPatient (Sta3n);
+CREATE INDEX IX_Sta3n ON Inpat.Inpatient (Sta3n);
 GO

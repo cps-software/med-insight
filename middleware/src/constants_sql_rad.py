@@ -1,7 +1,7 @@
 # constants_sql_rad.py
 """Constants for SLQ statements"""
 
-RAD_QUERY_01 = """
+RAD_QUERY_00 = """
     --
     -- This version of the query is based on the CDW RadiologyNuclearMedicineReport table
     -- Make sure you have selected CDWWork as the active database
@@ -34,4 +34,23 @@ RAD_QUERY_01 = """
         and rnmr.ExamDateTime <= ?
 
     ORDER BY rnmr.ExamDateTime;
+"""
+
+RAD_QUERY_01 = """
+    --
+    -- Get Patient Cohort and write selected data set to a temporary table
+    -- Before running, replace the ? placeholder values in the WHERE clause
+    -- For example: 508, '2025-01-01', and '2025-01-03'
+    --
+    SELECT
+        rnmr.PatientSID,
+        rnmr.ExamDateTime
+        rnmr.RadiologyNuclearMedicineReportSID,
+        rnmr.Sta3n,
+        rnmr.RadiologyLocationSID
+    INTO ##RadPatientCohort
+    FROM SStaff.RadiologyNuclearMedicineReport AS rnmr
+    WHERE pt.Sta3n = ?
+        AND rnmr.ExamDateTime >= ?
+        AND rnmr.ExamDateTime < ?;
 """

@@ -236,7 +236,7 @@ ADM_QUERY_03 = """
         'N' AS PurpleHeart,
         'N' AS ObservationPt,
         pd.AgentOrangeLocation,
-
+        i.AdmitWardLocationSID,  -- Update to use AdmitWardLocationIEN
         pd.POWLocation,
         '' AS Placeholder62,
         '' AS Placeholder63,
@@ -277,6 +277,7 @@ ADM_QUERY_03 = """
     INNER JOIN Dim.Division AS d ON wl.DivisionSID = d.DivisionSID
     INNER JOIN Dim.PeriodOfService AS pos ON p.PeriodOfServiceSID = pos.PeriodOfServiceSID
     INNER JOIN SStaff.SStaff AS s ON apc.AttendingPhysicianStaffSID = s.StaffSID
+    INNER JOIN Inpat.Inpatient AS i ON apc.PatientSID = i.PatientSID
     INNER JOIN Dim.VistASite ON apc.Sta3n = Dim.VistASite.Sta3n
 
     WHERE
