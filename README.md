@@ -84,11 +84,15 @@ Install Python:
 brew install python
 ```
 
-Verify Instalation:  
+Note: After installing via homebrew, the new version may not be recognized. If this is the case, refresh (or open/close) your terminal session.
+
+Verify Installation:  
 ```bash
 python3 --version
 pip3 --version
 ```
+
+This will show the latest Python3 and PIP3 versions, e.g., 3.13.2.
 
 #### Python Virtual Environment
 It is recommended that you set up a Python virtual environment. This provides a self-contained directory with a Python interpreter and a set of installed packages, which isolates the dependencies required for this project.
