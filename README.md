@@ -4,10 +4,11 @@ Med-Insight works with healthcare information to provide various services and in
 ## Overview
 Med-Insight is a full-stack application comprised of the following components:  
 
-- **frontend**: HTML/CSS/JavaScript user interface and client-side logic
-- **backend**: PHP driven server-side logic, APIs, and page rendering
-- **middleware**: Python based ETL and data management functionality
-- _**docs**: Project documentation and user guides
+| Component   | Description |
+| ----------- | ----------- |
+| data-source | Mock SQL database, REST service, and website that simulate data sources |
+| etl-layer   | Python-based ETL and medallion architecture data management functionality |
+| web-app     | PHP-based web application that includes a dashboard and other functionality |
 
 ## Getting Started
 To get started, clone this repository into a directory of your choice and navigate to the med-insight folder.
@@ -17,52 +18,8 @@ git clone https://github.com/cps-software/med-insight.git
 cd med-insight  
 ```
 
-## Folder Structure
-- `_dbscript`: database creation and update scripts
-- `_docs`: application documentation files
-- `backend`: PHP code for backend services
-- `frontend`: HTML, CSS, and JavaScript files for the user interface
-- `middleware`: Python code for ETL and data processing
-
-```txt
-med-insight/
-├── _dbscript/
-├── _docs/
-├── backend/
-│   ├── api/
-│   │   ├── auth.php
-│   │   ├── records.php
-│   │   ├── analysis.php
-│   │   ├── insights.php
-│   │   └── tracking.php
-│   ├── config/
-│   │   └── database.php
-│   ├── index.php
-├── frontend/
-│   ├── css/
-│   │   ├── styles.css
-│   │   └── dashboard.css
-│   ├── js/
-│   │   ├── main.js
-│   │   ├── dashboard.js
-│   │   └── tracking.js
-│   ├── pages/
-│   │   ├── dashboard.html
-│   │   └── tracking.html
-│   └── index.html
-├── middleware/
-│   ├── app/
-│   │   ├── model.py
-│   │   ├── preprocess.py
-│   │   ├── risk_analysis.py
-│   │   └── api.py
-│   ├── requirements.txt
-│   └── run.sh
-├── .gitignore
-└── README.md
-```
-
 ## Local Development Environment Setup
+Each component uses one or more technology. Refer to the README.md file within each of these subsystems for information on local development environmetn setup.  
 
 ### Python
 For Macbook users, macOS comes with a system version of Python pre-installed, but it is often outdated and not recommended for development.
