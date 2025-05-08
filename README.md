@@ -90,12 +90,6 @@ pip install -r requirements.txt
 #### Python dontenv Module
 The middleware component uses the Python `dotenv` module, provided by the `python-dotenv` package. Use of this module requires a `.env` file to be placed in the root middleware folder. This file is not under source control, so you will need to ask a peer developer for information on file contents, or to get a copy for your local development environment.
 
-### Local SQL Server Database
-This one is a little more entailed, since it requires a Docker image that runs Microsoft SQL Server 2019 within an Ubuntu Linux container. Refer to the Docker and Microsoft websites for installation instructions.
-
-### SQL Server Database Load
-Once Docker, Ubuntu, and Microsft SQL Server are installed and running in a container, proceed to running the SQL scripts located in the `_dbscript\sqlserver\cdwwork` folder. Begin with the "create" scripts, and then run the "insert" scripts.
-
 ### Local SQLite Database
 (this part not implemented yet)  
 
