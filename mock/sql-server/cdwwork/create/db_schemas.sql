@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------------
-| create_db_schemas.sql
+| db_schemas.sql
 |--------------------------------------------------------------------------------
 | Schema owner: sa
 | List schemas: SELECT name AS SchemaName FROM sys.schemas ORDER BY name;
@@ -10,18 +10,18 @@
 USE CDWWork;
 GO
 
--- Dimension (reference/lookup) tables
+-- create schema for Dimension (reference/lookup) tables
 CREATE SCHEMA Dim;
 GO
 
--- Inpatient tables
+-- create schema for Inpatient tables
 CREATE SCHEMA Inpat;
 GO
 
--- CDW Patient tables
+-- create schema for SPatient tables
 CREATE SCHEMA SPatient;
 GO
 
--- CDW Staff tables
+-- create schema for SStaff tables
 CREATE SCHEMA SStaff;
 GO

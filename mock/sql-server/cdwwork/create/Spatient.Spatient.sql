@@ -1,14 +1,14 @@
 /*
 |---------------------------------------------------------------
-| SPatient_SPatient.sql
+| Create: SPatient.SPatient.sql
 |---------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the SPatient schema
+-- create SPatient table in the SPatient schema
 CREATE TABLE SPatient.SPatient
 (
   PatientSID                              INT           NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE SPatient.SPatient
 );
 GO
 
--- Create indexes for the SPatient.Patient table
+-- create indexes for the SPatient.Patient table
 CREATE INDEX IX_PatientSID ON SPatient.SPatient (PatientSID);
 CREATE INDEX IX_PatientIEN ON SPatient.SPatient (PatientIEN);
 CREATE INDEX IX_Sta3n ON SPatient.SPatient (Sta3n);

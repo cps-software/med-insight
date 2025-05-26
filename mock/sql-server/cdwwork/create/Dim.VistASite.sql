@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| create_Dim_VistASite.sql
+| Create: Dim_VistASite.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create VistASite table in the Dim schema
 CREATE TABLE Dim.VistASite
 (
     Sta3n               SMALLINT       NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Dim.VistASite
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_Sta3n ON Dim.VistASite (Sta3n);
 CREATE INDEX IX_Facility ON Dim.VistASite (Facility);
 GO

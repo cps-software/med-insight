@@ -1,15 +1,15 @@
 /*
 |---------------------------------------------------------------
-| SStaff.RadiologyNuclearMedicineReport.sql
+| Create: SStaff.RadiologyNuclearMedicineReport.sql
 |---------------------------------------------------------------
 | VA Staff, including providers.
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the SStaff schema
+-- create RadiologyNuclearMedicineReport table in the SStaff schema
 CREATE TABLE SStaff.RadiologyNuclearMedicineReport
 (
   RadiologyNuclearMedicineReportSID     BIGINT          NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE SStaff.RadiologyNuclearMedicineReport
 );
 GO
 
--- Create indexes for the SPatient.Patient table
+-- create indexes for the SPatient.Patient table
 CREATE INDEX IX_RadiologyNuclearMedicineReportSID ON SStaff.RadiologyNuclearMedicineReport (RadiologyNuclearMedicineReportSID);
 CREATE INDEX IX_RadiologyNuclearMedicineReportIEN ON SStaff.RadiologyNuclearMedicineReport (RadiologyNuclearMedicineReportIEN);
 CREATE INDEX IX_Sta3n ON SStaff.RadiologyNuclearMedicineReport (Sta3n);

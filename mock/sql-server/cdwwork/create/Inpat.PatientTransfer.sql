@@ -1,14 +1,14 @@
 /*
 |---------------------------------------------------------------
-| create_tbl-Inpat_PatientTransfer.sql
+| Create: Inpat_PatientTransfer.sql
 |---------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Inpat schema
+-- create PatientTransfer table in the Inpat schema
 CREATE TABLE Inpat.PatientTransfer
 (
   PatientTransferSID                   BIGINT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Inpat.PatientTransfer
 );
 GO
 
--- Create indexes for the Inpat.PatientTransfer table
+-- create indexes for the Inpat.PatientTransfer table
 CREATE INDEX IX_PatientTransferSID ON Inpat.PatientTransfer (PatientTransferSID);
 CREATE INDEX IX_Sta3n ON Inpat.PatientTransfer (Sta3n);
 CREATE INDEX IX_InpatientSID ON Inpat.PatientTransfer (InpatientSID);

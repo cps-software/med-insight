@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| Dim.PeriodOfService.sql
+| Create: Dim.PeriodOfService.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create PeriodOfService table in the Dim schema
 CREATE TABLE Dim.PeriodOfService
 (
     PeriodOfServiceSID              int             NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE Dim.PeriodOfService
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_PeriodOfServiceSID ON Dim.PeriodOfService (PeriodOfServiceSID);
 CREATE INDEX IX_PeriodOfServiceIEN ON Dim.PeriodOfService (PeriodOfServiceIEN);
 CREATE INDEX IX_Sta3n ON Dim.PeriodOfService (Sta3n);

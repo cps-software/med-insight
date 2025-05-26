@@ -1,6 +1,6 @@
 /*
 |------------------------------------------------------------
-| create_Dim_Division.sql
+| create: Dim_Division.sql
 |------------------------------------------------------------
 */
 
@@ -8,7 +8,7 @@
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create Division table in the Dim schema
 CREATE TABLE Dim.Division
 (
     DivisionSID        smallint       NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE Dim.Division
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_DivisionSID ON Dim.Division (DivisionSID);
 CREATE INDEX IX_DivisionIEN ON Dim.Division (DivisionIEN);
 CREATE INDEX IX_Sta3n ON Dim.Division (Sta3n);

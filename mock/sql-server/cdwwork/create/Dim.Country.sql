@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| Dim.Country.sql
+| Create: Dim.Country.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create Country table in the Dim schema
 CREATE TABLE Dim.Country
 (
     CountrySID                      int             NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE Dim.Country
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_CountrySID ON Dim.Country (CountrySID);
 CREATE INDEX IX_CountryIEN ON Dim.Country (CountryIEN);
 CREATE INDEX IX_Sta3n ON Dim.Country (Sta3n);

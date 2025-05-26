@@ -1,14 +1,14 @@
-# Data Source Subsystem
-This subsystem simulates exteranl data sources, including a Microsoft SQL Server database, a RESTful web service, and a sample website.
+# Mock Services and Data Sources
+This subsystem simulates three external data sources: a REST API, a Microsoft SQL Server database, and a sample website.
 
-## PHP API
-Talk about this...
+## REST API
+Provide information on the REST API.
 
 ## SQL Server Database
 ### Local Setup
-Setting up a local instance of Microsoft SQL Server 2019 or 2020 on a Mac is a little more entailed, since this software does not run natively on macOS. One approach is to use a Docker image that runs Microsoft SQL Server 2019 within an Ubuntu Linux container.  
+Setting up a local instance of Microsoft SQL Server 2019 or 2020 on a Mac is more entailed than on other platforms, since SQL Server does not run natively on macOS. One approach is to use a Docker image that runs Microsoft SQL Server 2019 within an Ubuntu Linux container. Then, you can start the Docker image and interact with the database server via the exposed port number and a standard connection string.
 
-Follow these steps to install Docker Desktop on your macOS laptop and then run Microsoft SQL Server inside a Docker container.
+Follow these steps to install Docker Desktop on your macOS laptop and run Microsoft SQL Server inside a Docker container.
 #### Step 1: Install Docker Desktop on macOS
 1. Download Docker Desktop:
    - Visit [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
@@ -47,9 +47,9 @@ Follow these steps to install Docker Desktop on your macOS laptop and then run M
    -d mcr.microsoft.com/mssql/server:2019-latest
    ```
 
-   - Replace YourStrong!Passw0rd with a secure password that meets SQL Server password complexity rules.
+   - Replace **_YourStrong!Passw0rd_** with a secure password that meets SQL Server password complexity rules.
 
-   - `-p 1433:1433` maps port 1433 from the container to your Mac, allowing you to connect.
+   - The parameter `-p 1433:1433` maps port 1433 from the container to your Mac, allowing you to connect.
 
    - The `-d` flag runs the container in the background.
 
@@ -61,10 +61,26 @@ Follow these steps to install Docker Desktop on your macOS laptop and then run M
 
    - You should see the sqlserver2019 container running.
 
-For more details, refer to the Docker and Microsoft websites for installation instructions.
+For more details, refer to the Docker and Microsoft websites for installation instructions.  
+
+**_Note:_** I had some initial trouble getting this to work. After troubleshooting, I cleared the issues, but ended up keeping the original "Strong!" password. This may be due to my password not meeting security rules, such as length. So, I threw in the towel and went with the default password (yeah, I know...).  
 
 ### Database Load
-Once Docker, Ubuntu, and Microsft SQL Server are installed and running in a container, proceed to running the SQL scripts located in the `_dbscript\sqlserver\cdwwork` folder. Begin with the "create" scripts, and then run the "insert" scripts.
+Once Docker, Ubuntu, and Microsft SQL Server are installed and running in a container, proceed to running the SQL scripts located in the `mock\sql-server\cdwwork` folder.  
+
+Begin with the "create" scripts (database, schemas, tables), and then run the "insert" scripts to populate the tables with sample data.  
+
+These scripts can be run using a tool of your choice, such as Azure Data Studio or Visual Studio Code and the Microsoft SQL Server (mssql) extension (**recommended**).  
+
+For either tool, first create a new connection using the proper connection information, for example:  
+```text
+            server name: 127.0.0.1,1433  
+Trust server connection: yes  
+    Authentication type: SQL Login  
+              User name: sa  
+               Password: MyS3cur3P@ssw0rd  
+          Save Password: yes  
+```
 
 ## Website
 Talk about this...

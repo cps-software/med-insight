@@ -1,15 +1,15 @@
 /*
 |---------------------------------------------------------------
-| SStaff.SStaff.sql
+| Create: SStaff.SStaff.sql
 |---------------------------------------------------------------
 | VA Staff, including providers.
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the SStaff schema
+-- create SStaff table in the SStaff schema
 CREATE TABLE SStaff.SStaff
 (
   StaffSID             INT           NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE SStaff.SStaff
 );
 GO
 
--- Create indexes for the SPatient.Patient table
+-- create indexes for the SPatient.Patient table
 CREATE INDEX IX_StaffSID ON SStaff.SStaff (StaffSID);
 CREATE INDEX IX_StaffIEN ON SStaff.SStaff (StaffIEN);
 CREATE INDEX IX_Sta3n ON SStaff.SStaff (Sta3n);

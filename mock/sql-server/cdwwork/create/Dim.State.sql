@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| Dim.State.sql
+| Create: Dim.State.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create State table in the Dim schema
 CREATE TABLE Dim.[State]
 (
     StateSID          int            NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE Dim.[State]
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_StateSID ON Dim.[State] (StateSID);
 CREATE INDEX IX_StateIEN ON Dim.[State] (StateIEN);
 CREATE INDEX IX_Sta3n ON Dim.[State] (Sta3n);

@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| create_Dim_WardLocation.sql
+| Create: Dim_WardLocation.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create WardLocation table in the Dim schema
 CREATE TABLE Dim.WardLocation
 (
     WardLocationSID    int            NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE Dim.WardLocation
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_WardLocationSID ON Dim.WardLocation (WardLocationSID);
 CREATE INDEX IX_WardLocationIEN ON Dim.WardLocation (WardLocationIEN);
 CREATE INDEX IX_Sta3n ON Dim.WardLocation (Sta3n);

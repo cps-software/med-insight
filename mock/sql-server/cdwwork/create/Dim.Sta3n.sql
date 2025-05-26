@@ -1,14 +1,14 @@
 /*
 |------------------------------------------------------------
-| create_Dim_Sta3n.sql
+| Create: Dim_Sta3n.sql
 |------------------------------------------------------------
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Create table in the Dim schema
+-- create Sta3n table in the Dim schema
 CREATE TABLE Dim.Sta3n
 (
     Sta3n               SMALLINT       NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Dim.Sta3n
 );
 GO
 
--- Create indexes
+-- create indexes
 CREATE INDEX IX_Sta3n ON Dim.Sta3n (Sta3n);
 CREATE INDEX IX_Sta3nName ON Dim.Sta3n (Sta3nName);
 GO
