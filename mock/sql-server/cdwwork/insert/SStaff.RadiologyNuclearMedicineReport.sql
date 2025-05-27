@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------------
-| SStaff.RadiologyNuclearMedicineReport.sql
+| Insert: SStaff.RadiologyNuclearMedicineReport.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | RadiologyNuclearMedicineReportSID => 2001 series

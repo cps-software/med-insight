@@ -1,16 +1,16 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.VistASite.sql
+| Insert: Dim.VistASite.sql
 |--------------------------------------------------------------------------------
 | Insert sample data into table:  Dim.VistASite
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim.VistAStie table
+-- insert data into Dim.VistAStie table
 INSERT INTO Dim.VistASite
 (
     Sta3n, Facility, VISN, Active, NextSta3n, Region, TimeZone, SiteCode, DistrictNumber, DistrictName, City, StateSID

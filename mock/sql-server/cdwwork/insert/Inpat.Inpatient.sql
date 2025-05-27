@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Inpat.Inpatient.sql
+| Insert: Inpat.Inpatient.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | InpatientSID => 1638001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into the Inpat.Inpatient table
+-- insert data into the Inpat.Inpatient table
 INSERT INTO Inpat.Inpatient
 (
   InpatientSID, PTFIEN, Sta3n, PatientSID, MeansTestIndicator, PatientFirstName, AdmitDateTime, AdmitDateSID, AdmitSourceSID, AdmitEligibilitySID, TransferFromFacility, ASIHDays, AdmitMASMovementTypeSID, AdmitFacilityMovementTypeSID, AdmitFromInstitutionSID, AdmitWardLocationSID, AdmitRoomBedSID, AdmitDiagnosis, ProviderSID, HeadNeckCancerFlag, IonizingRadiationFlag, SHADFlag, PatientSSN, PseudoSSNReason, SSNVerificationStatus, GovernmentEmployeeFlag, SensitiveFlag, Age, BirthDateTime

@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| insert_Dim_Division.sql
+| Insert: Dim.Division.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | DivisionSID => 2001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim.Sta3n table
+-- insert data into Dim.Sta3n table
 INSERT INTO Dim.Division
 (
     DivisionSID, DivisionIEN, Sta3n, DivisionName, InstitutionSID, Sta6a

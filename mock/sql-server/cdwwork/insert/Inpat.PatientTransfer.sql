@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Inpat.PatientTransfer.sql
+| Insert: Inpat.PatientTransfer.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | PatientTransferSID => 8001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into the Inpat.PatientTransfer table
+-- insert data into the Inpat.PatientTransfer table
 INSERT INTO Inpat.PatientTransfer
 (
   PatientTransferSID, PatientMovementIEN, Sta3n, InpatientSID, OrdinalNumber, PatientSID, PatientTransferDateTime, PatientTransferVistaErrorDate, PatientTransferDateTimeTransformSID, PatientTransferDateSID, MASMovementTypeSID, FacilityMovementTypeSID, TransferInstitutionSID, GainingWardLocationSID, RoomBedSID, PrimaryPhysicianStaffSID, ASIHInpatientSID, AttendingPhysicianStaffSID, ASIHSequence, EnteredByStaffSID, EnteredOnDateTime, LastEditedByStaffSID, LastEditedOnDateTime, MPCRChangeFlag, AdmitDateTime, AdmitVistaErrorDate, AdmitDateTimeTransformSID, DischargeDateTime, DischargeVistaErrorDate, DischargeDateTimeTransformSID, LosingSpecialtySID, LosingWardLocationSID, LosingWardCDR, LeaveDays, PassDays, DischargeMovementFlag, TransmitFlag

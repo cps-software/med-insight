@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| SPatient.SPatientAddress.sql
+| Insert: SPatient.SPatientAddress.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | SpatientAddressSID => 1001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into SPatient.SpatientAddress table
+-- insert data into SPatient.SpatientAddress table
 INSERT INTO SPatient.SpatientAddress
 (
     SPatientAddressSID, PatientSID, PatientIEN, Sta3n, OrdinalNumber, AddressType, StreetAddress1, StreetAddress2, StreetAddress3, City, County, [State], StateSID, Zip, Zip4, PostalCode, Country, CountrySID, EmploymentStatus

@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------------
-| SPatient.SPatientDisability.sql
+| Insert: SPatient.SPatientDisability.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | SPatientDisabilitySID => 1001 series

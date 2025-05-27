@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.PeriodOfService.sql
+| Insert: Dim.PeriodOfService.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | StateSID => 12001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim.PeriodOfService table
+-- insert data into Dim.PeriodOfService table
 INSERT INTO Dim.PeriodOfService
 (
     PeriodOfServiceSID, PeriodOfServiceIEN, Sta3n, PeriodOfService, PeriodOfServiceAbbreviation, PeriodOfServiceCode

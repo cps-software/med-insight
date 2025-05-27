@@ -1,12 +1,12 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.WardLocation.sql
+| Insert: Dim.WardLocation.sql
 |--------------------------------------------------------------------------------
 | Insert sample data into table:  Dim.WardLocation
 | WardLoacationSID => 2001 series
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 

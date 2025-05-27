@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.Country.sql
+| Insert: Dim.Country.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | CountrySID => 1200009999 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim table
+-- insert data into Dim table
 INSERT INTO Dim.Country
 (
     CountrySID, CountryIEN, Sta3n, CountryCode, NumericCode, PostalName, PostalDescription

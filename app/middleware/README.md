@@ -28,7 +28,7 @@ python3 --version
 pip3 --version
 ```
 
-This will show the latest Python3 and PIP3 versions, e.g., 3.13.2.
+This will show the latest Python3 and PIP3 versions, e.g., 3.13.3 and 25.0.1.
 
 ### Python Virtual Environment
 It is recommended that you set up a Python virtual environment. This provides a self-contained directory with a Python interpreter and a set of installed packages, which isolates the dependencies required for this project.
@@ -36,31 +36,31 @@ It is recommended that you set up a Python virtual environment. This provides a 
 For my local setup, I selected the root `middleware` folder as the location for the virtual environment.
 
 Create a virtual environment:   
-```txt
-cd ~/swdev/cps/med-insight/middleware
-python3 -m venv cpsenv
+```bash
+cd ~/swdev/cps/med-insight/app/middleware
+python3 -m venv mypyenv
 ```
 
-Replace "cpsenv" with your preferred name for the environment folder that's created.
+Replace "mypyenv" with your preferred name for the environment folder that's created. It is common to use "venv" for the name of the environment, so that's what I'll assume for the subsequent steps below.
 
 Activate the virtual environment. Below are the Linux/macOS and Windows commands, respectively.
 
-```txt
+```bash
 source cpsenv/bin/activate
 cpsenv\Scripts\activate
 ```
 
 For Git Bash, use a slightly different command:
-```text
+```bash
 source cpsenv\Scripts\Activate
 ```
 
-After activation, you’ll notice the environment name `(cpsenv)` appears in your terminal prompt. You can invoke Python with the command, `python` (as opposed to `python3`).
+After activation, you’ll notice the environment name `(venv)` appears in your terminal prompt. You can invoke Python with the command, `python` (as opposed to `python3`).
 
 You can then install packages as normal using `pip` or install all packages from `requirements.txt`.
 
 To activate an environment and install from the `requirements.txt` file:
-```txt
+```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -68,3 +68,34 @@ pip install -r requirements.txt
 
 ### Python dontenv Module
 The middleware component uses the Python `dotenv` module, provided by the `python-dotenv` package. Use of this module requires a `.env` file to be placed in the root middleware folder. This file is not under source control, so you will need to ask a peer developer for information on file contents, or to get a copy for your local development environment.
+
+Below are the contents of a sample .env file, with sensitive values removed.
+
+```txt
+# Database configuration
+DB_ENGINE=MS_SQL_SERVER_2019
+DB_SERVER=127.0.0.1,1433
+DB_NAME=CDWWork
+DB_USER=sa
+DB_PASSWORD=**********
+TRUST_CONNECTION=yes
+TRUST_CERT=yes
+
+# Other configuration settings
+EXTRACT_FOLDER=./extract/
+ADM_EXTRACT_FILENAME=adm_extract_01.csv
+```
+
+or (an older version that is tailored for external hosted SQL Server)...
+
+```txt
+# Database configuration
+DB_SERVER=vhacdwdwhsql33.vha.med.va.gov/
+DB_NAME=CDWWork
+DB_USER=VHAMASTER\VHAISWSYLVEC
+DB_PASSWORD=
+
+# Other configuration settings
+EXTRACT_FOLDER=./extracts/
+ADM_EXTRACT_FILENAME=adm_extract_01.csv
+```

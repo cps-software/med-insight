@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.State.sql
+| Insert: Dim.State.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | StateSID => 5001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim.Sta3n table
+-- insert data into Dim.Sta3n table
 INSERT INTO Dim.[State]
 (
     StateSID, StateIEN, Sta3n, [State], StateAbbrev, VAStateCode

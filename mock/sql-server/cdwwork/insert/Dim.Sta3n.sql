@@ -1,16 +1,16 @@
 /*
 |--------------------------------------------------------------------------------
-| Dim.Sta3n.sql
+| Insert: Dim.Sta3n.sql
 |--------------------------------------------------------------------------------
 | Insert sample data into table:  Dim_Sta3n
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into Dim.Sta3n table
+-- insert data into Dim.Sta3n table
 INSERT INTO Dim.Sta3n
 (
     Sta3n, Sta3nName, VISNPreFY15, VISNFY16, VISNFY17, Active, NextSta3n, TimeZone, SiteCode, RegionFY15, DistrictNameFY16, DistrictNumberFY16, DistrictNameFY17, DistrictNumberFY17, City, StateSID

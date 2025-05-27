@@ -1,17 +1,17 @@
 /*
 |--------------------------------------------------------------------------------
-| Spatient.Spatient.sql
+| Insert: Spatient.Spatient.sql
 |--------------------------------------------------------------------------------
 | Insert test data
 | PatientSID => 1001 series
 |
 */
 
--- Set the active database
+-- set the active database
 USE CDWWork;
 GO
 
--- Insert data into the SPatient.SPatient table
+-- insert data into the SPatient.SPatient table
 INSERT INTO SPatient.SPatient
 (
   PatientSID, PatientIEN, Sta3n, PatientName, PatientLastName, PatientFirstName, TestPatientFlag, CDWPossibleTestPatientFlag, VeteranFlag, PatientType, PatientTypeSID, PatientICN, ScrSSN, PatientSSN, PseudoSSNReason, SSNVerificationStatus, GovernmentEmployeeFlag, SensitiveFlag, Age, BirthDateTime, BirthVistaErrorDate, BirthDateTimeTransformSID, DeceasedFlag, DeathDateTime, DeathVistaErrorDate, DeathDateTimeTransformSID, DeathEnteredByStaffSID, DeathNotificationSource, DeathDocumentationType, DeathModifiedDateTime, DeathModifiedVistaErrorDate, DeathModifiedDateTimeTransformSID, DeathLastUpdatedByStaffSID, Gender, SelfIdentifiedGender, Religion, ReligionSID, MaritalStatus, MaritalStatusSID, CollateralSponsorPatientSID, CurrentEnrollmentSID, MeansTestStatus, CurrentMeansTestStatusSID, PeriodOfService, PeriodOfServiceSID, OperationDesertShieldRank, ODSRankType, ODSRecalledCode, ODSTreatmentDateTime, ODSTreatmentVistaErrorDate, ODSTreatmentDateTimeTransformSID, FederalAgencySID, FilipinoVeteranCode, ServiceConnectedFlag, Eligibility, EligibilityVACode, EligibilitySID, EligibilityStatus, EligibilityStatusDateTime, EligibilityStatusVistaErrorDate, EligibilityStatusDateTimeTransformSID, EligibilityVerificationSource, EligibilityVerificationMethod, EligibilityInterimDateTime, EligibilityInterimVistaErrorDate, EligibilityInterimDateTimeTransformSID, EligibilityEnteredStaffSID, IneligibleReason, IneligibleVAROReason, IneligibleCity, IneligibleStateSID, IneligibleDateTime, IneligibleVistaErrorDate, IneligibleDateTimeTransformSID, IneligibleSource, PatientMissingSource, PatientMissingDateTime, PatientMissingVistaErrorDate, PatientMissingDateTimeTransformSID, PatientMissingCity, PatientMissingStateSID, FugitiveFelonFlag, FFFEnteredDateTime, FFFEnteredVistaErrorDate, FFFEnteredDateTimeTransformSID, FFFEnteredStaffSID, FFFRemovedReason, FFFRemovedDateTime, FFFRemovedVistaErrorDate, FFFRemovedDateTimeTransformSID, FFFRemovedStaffSID, PatientEnteredByStaffSID, PatientEnteredCode, PatientEnteredRemark, PatientEnteredDateTime, PatientEnteredVistaErrorDate, PatientEnteredDateTimeTransformSID, DuplicateRecordStatus, DestinationMergePatientSID, PreferredInstitutionSID, PreferredInstitutionSource, EmergencyResponseIndicator, InsuranceCoverageFlag, MedicaidEligibleFlag, MedicaidNumber, MedicaidInquireDateTime, MedicaidInquireVistaErrorDate, MedicaidInquireDateTimeTransformSID, VeteranTransportationProgramFlag
