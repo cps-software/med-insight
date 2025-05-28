@@ -1,5 +1,9 @@
 # Mock Services and Data Sources
-This subsystem simulates three external data sources: a REST API, a Microsoft SQL Server database, and a sample website.
+This subsystem simulates three external data sources:
+
+ - A **REST API** that returns data for a topic and date range
+ - A **Microsoft SQL Server database** that simulates a data warehouse
+ - A **Sample Website** that can be scrapped for content
 
 ## REST API
 Provide information on the REST API.
@@ -82,5 +86,5 @@ Trust server connection: yes
           Save Password: yes  
 ```
 
-## Website
-Talk about this...
+## Sample Website
+Provide information on the sample website.
