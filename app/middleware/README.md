@@ -1,4 +1,4 @@
-# ETL Process Subsystem
+# App Middleware Component
 
 ## Python
 For Macbook users, macOS comes with a system version of Python pre-installed, but it is often outdated and not recommended for development.
@@ -66,7 +66,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Python dontenv Module
+### Python dotenv Module
 The middleware component uses the Python `dotenv` module, provided by the `python-dotenv` package. Use of this module requires a `.env` file to be placed in the root middleware folder. This file is not under source control, so you will need to ask a peer developer for information on file contents, or to get a copy for your local development environment.
 
 Below are the contents of a sample .env file, with sensitive values removed.

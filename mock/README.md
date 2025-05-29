@@ -86,5 +86,33 @@ Trust server connection: yes
           Save Password: yes  
 ```
 
+### Python Dependencies
+Now that you have installed SQL Server as a Docker image, created your database, and populated the tables with sample data, you will need to configure your Python program (which uses the pyodbc library) to work with the database server. This entails installing several dependencies.
+
+Add Microsoft's Homebrew Tap, which allows you to install the official Microsoft ODBC driver for SQL Server.
+
+```bash
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+```
+
+Install ODBC Driver for SQL Server (e.g., version 18). 
+
+```bash
+brew install msodbcsql18
+```
+
+Install `unixODBC`, the ODBC driver manager that pyodbc relies on.
+
+```bash
+brew install unixodbc
+```
+
+Verify driver installation by listing installed ODBC drivers.
+
+```bash
+odbcinst -q -d
+```
+
 ## Sample Website
 Provide information on the sample website.
